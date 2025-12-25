@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Sidebar from "../component/Sidebar";
-import Header from "../component/Header";
-import ReusableTable from "../component/ReuseableTable";
+import Sidebar from "../../component/Sidebar";
+import Header from "../../component/Header";
+import ReusableTable from "../../component/ReuseableTable";
 
 const TransactionHistory = () => {
   const [active, setActive] = useState("Customer");
@@ -9,9 +9,10 @@ const TransactionHistory = () => {
   const columns = [
     { label: "TRANSACTION ID", key: "id" },
     { label: "CUSTOMER NAME", key: "customer" },
-    { label: "ADDRESS", key: "address" },
+    { label: "CONTRACTOR NAME", key: "contractor" },
     { label: "CONTACT NO", key: "contact" },
     { label: "WORK", key: "work" },
+    { label: "AMOUNT", key: "amount" },
   ];
 
   const data = [
@@ -21,6 +22,7 @@ const TransactionHistory = () => {
       address: "089 Kutch Green Apt. 448",
       contact: "(830) 556-6651",
       work: "Electric",
+      amount: "$1200",
     },
     {
       id: "00002",
@@ -28,6 +30,7 @@ const TransactionHistory = () => {
       address: "089 Kutch Green Apt. 448",
       contact: "(830) 556-6651",
       work: "Electric",
+      amount: "$1200",
     },
     {
       id: "00003",
@@ -35,6 +38,7 @@ const TransactionHistory = () => {
       address: "089 Kutch Green Apt. 448",
       contact: "(830) 556-6651",
       work: "Electric",
+      amount: "$1200",
     },
     {
       id: "00004",
@@ -42,6 +46,7 @@ const TransactionHistory = () => {
       address: "089 Kutch Green Apt. 448",
       contact: "(830) 556-6651",
       work: "Electric",
+      amount: "$1200",
     },
     {
       id: "00005",
@@ -49,6 +54,7 @@ const TransactionHistory = () => {
       address: "089 Kutch Green Apt. 448",
       contact: "(830) 556-6651",
       work: "Electric",
+      amount: "$1200",
     },
     {
       id: "00006",
@@ -56,6 +62,7 @@ const TransactionHistory = () => {
       address: "089 Kutch Green Apt. 448",
       contact: "(830) 556-6651",
       work: "Electric",
+      amount: "$1200",
     },
     {
       id: "00007",
@@ -63,6 +70,7 @@ const TransactionHistory = () => {
       address: "089 Kutch Green Apt. 448",
       contact: "(830) 556-6651",
       work: "Electric",
+      amount: "$1200",
     },
   ];
 

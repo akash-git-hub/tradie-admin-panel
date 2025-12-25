@@ -14010,3 +14010,10 @@ span.Input-Group-Icon.input-group-text{
   background-color: #E6B84C;
   color: #fff;
 }
+
+
+button.btn.btn-outline-secondary:hover {
+    background: transparent;
+    color: #6e7880;
+    border: 1px solid #000;
+}

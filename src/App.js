@@ -7,6 +7,7 @@ import ContractorList from "./pages/contractor/ContractorList";
 import ProjectDetail from "./pages/project/ProjectDetail";
 import Auth from './services/Auth';
 import PublicAuth from "./services/PublicAuth";
+import TransactionHistory from "./pages/revenue/TransactionHistory";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/customers" element={<CustomerList />} />
           <Route path="/contractors" element={<ContractorList />} />
           <Route path="/project_detail" element={<ProjectDetail />} />
+          <Route path="/transaction_history" element={<TransactionHistory />} />
         </Route>
       </Routes>
     </div>
