@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Badge, Table } from "react-bootstrap";
+import { Badge, Button, Table } from "react-bootstrap";
 
 import Header from "../../component/Header";
 import Sidebar from "../../component/Sidebar";
@@ -7,7 +7,7 @@ import { getContractorsAPI } from "../../services/NetworkCall";
 import { errorAlert } from "../../component/Alert";
 import TablePagination from "../../component/TablePagination";
 import { Loader } from "../../component/Loader";
-import ChatIcon from "../../Icon/ChatIcon";
+import MessageIcon from "../../Icon/MessageIcon";
 
 const ContractorList = () => {
   const [loading, setLoading] = useState(false);
@@ -70,7 +70,7 @@ const ContractorList = () => {
                       <td className="small"> {data?.email} </td>
                       <td className="small">{data?.address}</td>
                       <td className="small">{data?.mobile_number}</td>
-                      <td className="small"><ChatIcon/> MESSAGE</td>
+                      <td className="small"><Button variant="outline-secondary"><MessageIcon/> MESSAGE</Button></td>
                     </tr>
                   ))}
                 </tbody>
