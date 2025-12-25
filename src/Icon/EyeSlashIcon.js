@@ -6,6 +6,7 @@ const EyeSlashIcon = ({
   strokeWidth = 1.5,
   className = "",
   style = {},
+  onClick = () => { },
 }) => {
   return (
     <svg
@@ -16,6 +17,7 @@ const EyeSlashIcon = ({
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       style={style}
+      onClick={onClick}
     >
       <path
         d="M14.53 9.47L9.47 14.53C8.82 13.88 8.42 12.99 8.42 12C8.42 10.02 10.02 8.42 12 8.42C12.99 8.42 13.88 8.82 14.53 9.47Z"

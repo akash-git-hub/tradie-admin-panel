@@ -1,7 +1,8 @@
 import { Table, Pagination } from "react-bootstrap";
 import { useState } from "react";
+import TablePagination from "./TablePagination";
 
-const ReusableTable = ({ columns, data, rowsPerPage = 6 }) => {
+const ReusableTable = ({ columns, data, pagination, pageHandler, rowsPerPage = 6 }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const totalPages = Math.ceil(data.length / rowsPerPage);
@@ -37,7 +38,6 @@ const ReusableTable = ({ columns, data, rowsPerPage = 6 }) => {
           ))}
         </tbody>
       </Table>
-
       {/* Pagination */}
       {totalPages > 1 && (
         <div className="d-flex justify-content-end mt-2">

@@ -1,7 +1,7 @@
 import { Container, Row, Col, Card, Badge, Nav, Tab } from "react-bootstrap";
 import { useState } from "react";
-import Header from "../component/Header";
-import Sidebar from "../component/Sidebar";
+import Header from "../../component/Header";
+import Sidebar from "../../component/Sidebar";
 
 
 const ProjectDetail = () => {
@@ -9,9 +9,7 @@ const ProjectDetail = () => {
 
   return (
     <div className="d-flex min-vh-100">
-      {/* ===== SIDEBAR ===== */}
       <Sidebar />
-
       {/* ===== MAIN AREA ===== */}
       <div className="flex-grow-1">
         <Header />

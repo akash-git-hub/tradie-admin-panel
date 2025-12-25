@@ -6,6 +6,7 @@ const EyeIcon = ({
   strokeWidth = 1.5,
   className = "",
   style = {},
+  onClick = () => { },
 }) => {
   return (
     <svg
@@ -16,6 +17,7 @@ const EyeIcon = ({
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       style={style}
+      onClick={onClick}
     >
       <path
         d="M15.58 12C15.58 13.98 13.98 15.58 12 15.58C10.02 15.58 8.42 13.98 8.42 12C8.42 10.02 10.02 8.42 12 8.42C13.98 8.42 15.58 10.02 15.58 12Z"

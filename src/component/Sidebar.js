@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Nav, Collapse } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import CustomerIcon from "../Icon/CustomerIcon";
 import DashboardIcon from "../Icon/DashboardIcon";
@@ -12,14 +12,25 @@ import SettingIcon from "../Icon/SettingIcon";
 import LogoutIcon from "../Icon/LogoutIcon";
 import BoxIcon from "../Icon/BoxIcon";
 import RevenueIcon from "../Icon/RevenueIcon";
+import { AuthContext } from "../states/AuthContext";
 
-const Sidebar = ({ active, onLinkClick }) => {
+const Sidebar = () => {
   const [openRevenue, setOpenRevenue] = useState(false);
+  const { setLoggedIn, profileData, setProfileData } = useContext(AuthContext);
   const navigate = useNavigate();
+  const pathname = useLocation().pathname;
 
-  const handleLinkClick = (link, route) => {
-    if (onLinkClick) onLinkClick(link);
+  const handleLinkClick = (route) => {
     if (route) navigate(route); // Redirect to route
+  };
+
+  const logOutHandler = () => {
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("profileData");
+    localStorage.removeItem("loggedIn");
+    setLoggedIn(false);
+    setProfileData({});
+    navigate('/');
   };
 
   return (
@@ -40,67 +51,67 @@ const Sidebar = ({ active, onLinkClick }) => {
 
       <Nav className="flex-column gap-2">
         <Nav.Link
-          onClick={() => handleLinkClick("Dashboard", "/dashboard")}
-          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${active === "Dashboard" ? "bg-warning text-white fw-semibold" : "text-dark"
+          onClick={() => handleLinkClick("#")}
+          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${pathname === "/dashboard" ? "bg-warning text-white fw-semibold" : "text-dark"
             }`}
         >
-          <DashboardIcon color={active === "Dashboard" ? "#fff" : "#292D32"} />
+          <DashboardIcon color={pathname === "/dashboard" ? "#fff" : "#292D32"} />
           Dashboard
         </Nav.Link>
 
         <Nav.Link
-          onClick={() => handleLinkClick("Customer", "/customer")}
-          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${active === "Customer" ? "bg-warning text-white fw-semibold" : "text-dark"
+          onClick={() => handleLinkClick("/customers")}
+          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${pathname === "/customers" ? "bg-warning text-white fw-semibold" : "text-dark"
             }`}
         >
-          <CustomerIcon color={active === "Customer" ? "#fff" : "#292D32"} />
+          <CustomerIcon color={pathname === "/customers" ? "#fff" : "#292D32"} />
           Customer
         </Nav.Link>
 
         <Nav.Link
-          onClick={() => handleLinkClick("Contractor", "/contractor")}
-          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${active === "Contractor" ? "bg-warning text-white fw-semibold" : "text-dark"
+          onClick={() => handleLinkClick("/contractors")}
+          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${pathname === "/contractors" ? "bg-warning text-white fw-semibold" : "text-dark"
             }`}
         >
-          <ContractIcon color={active === "Contractor" ? "#fff" : "#292D32"} />
+          <ContractIcon color={pathname === "/contractors" ? "#fff" : "#292D32"} />
           Contractor
         </Nav.Link>
 
         <Nav.Link
-          onClick={() => handleLinkClick("Project", "/projects")}
-          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${active === "Project" ? "bg-warning text-white fw-semibold" : "text-dark"
+          onClick={() => handleLinkClick("/projects")}
+          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${pathname === "/projects" ? "bg-warning text-white fw-semibold" : "text-dark"
             }`}
         >
-          <ProjectIcon color={active === "Project" ? "#fff" : "#292D32"} />
+          <ProjectIcon color={pathname === "/projects" ? "#fff" : "#292D32"} />
           Project
         </Nav.Link>
 
         <Nav.Link
           onClick={() => handleLinkClick("Messages", "/messages")}
-          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${active === "Messages" ? "bg-warning text-white fw-semibold" : "text-dark"
+          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${pathname === "Messages" ? "bg-warning text-white fw-semibold" : "text-dark"
             }`}
         >
-          <ChatIcon color={active === "Messages" ? "#fff" : "#292D32"} />
+          <ChatIcon color={pathname === "Messages" ? "#fff" : "#292D32"} />
           Messages
         </Nav.Link>
 
         <Nav.Link
-          onClick={() => handleLinkClick("License", "/license")}
-          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${active === "License" ? "bg-warning text-white fw-semibold" : "text-dark"
+          onClick={() => handleLinkClick("/license")}
+          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${pathname === "License" ? "bg-warning text-white fw-semibold" : "text-dark"
             }`}
         >
-          <LicenseIcon color={active === "License" ? "#fff" : "#292D32"} />
+          <LicenseIcon color={pathname === "License" ? "#fff" : "#292D32"} />
           License Verification
         </Nav.Link>
 
         {/* Revenue */}
         <Nav.Link
           onClick={() => setOpenRevenue(!openRevenue)}
-          className={`d-flex align-items-center justify-content-between gap-3 px-4 py-3 sidebar-link ${active === "Revenue" ? "bg-warning text-white fw-semibold" : "text-dark"
+          className={`d-flex align-items-center justify-content-between gap-3 px-4 py-3 sidebar-link ${pathname === "Revenue" ? "bg-warning text-white fw-semibold" : "text-dark"
             }`}
         >
           <span className="d-flex align-items-center gap-3">
-            <RevenueIcon color={active === "Revenue" ? "#fff" : "#292D32"} />
+            <RevenueIcon color={pathname === "Revenue" ? "#fff" : "#292D32"} />
             Revenue
           </span>
         </Nav.Link>
@@ -109,19 +120,19 @@ const Sidebar = ({ active, onLinkClick }) => {
           <div className="ps-5 mt-2">
             <Nav.Link
               onClick={() => handleLinkClick("Earnings", "/revenue/earnings")}
-              className={`text-dark small py-1 ${active === "Earnings" ? "text-warning fw-semibold" : ""}`}
+              className={`text-dark small py-1 ${pathname === "Earnings" ? "text-warning fw-semibold" : ""}`}
             >
               Earnings
             </Nav.Link>
             <Nav.Link
               onClick={() => handleLinkClick("Transaction History", "/revenue/transactions")}
-              className={`text-dark small py-1 ${active === "Transaction History" ? "text-warning fw-semibold" : ""}`}
+              className={`text-dark small py-1 ${pathname === "Transaction History" ? "text-warning fw-semibold" : ""}`}
             >
               Transaction History
             </Nav.Link>
             <Nav.Link
               onClick={() => handleLinkClick("Platform Fee", "/revenue/platform-fee")}
-              className={`text-dark small py-1 ${active === "Platform Fee" ? "text-warning fw-semibold" : ""}`}
+              className={`text-dark small py-1 ${pathname === "Platform Fee" ? "text-warning fw-semibold" : ""}`}
             >
               Platform Fee
             </Nav.Link>
@@ -134,28 +145,27 @@ const Sidebar = ({ active, onLinkClick }) => {
 
         <Nav.Link
           onClick={() => handleLinkClick("Offers", "/offers")}
-          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${active === "Offers" ? "bg-warning text-white fw-semibold" : "text-dark"
+          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${pathname === "Offers" ? "bg-warning text-white fw-semibold" : "text-dark"
             }`}
         >
-          <BoxIcon color={active === "Offers" ? "#fff" : "#292D32"} />
+          <BoxIcon color={pathname === "Offers" ? "#fff" : "#292D32"} />
           Offers
         </Nav.Link>
 
         <Nav.Link
           onClick={() => handleLinkClick("Settings", "/settings")}
-          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${active === "Settings" ? "bg-warning text-white fw-semibold" : "text-dark"
+          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${pathname === "Settings" ? "bg-warning text-white fw-semibold" : "text-dark"
             }`}
         >
-          <SettingIcon color={active === "Settings" ? "#fff" : "#292D32"} />
+          <SettingIcon color={pathname === "Settings" ? "#fff" : "#292D32"} />
           Settings
         </Nav.Link>
 
         <Nav.Link
-          onClick={() => handleLinkClick("Logout", "/logout")}
-          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${active === "Logout" ? "bg-warning text-white fw-semibold" : "text-dark"
-            }`}
+          onClick={logOutHandler}
+          className={"d-flex align-items-center gap-3 px-4 py-3 sidebar-link text-dark"}
         >
-          <LogoutIcon color={active === "Logout" ? "#fff" : "#292D32"} />
+          <LogoutIcon color={"#292D32"} />
           LogOut
         </Nav.Link>
       </Nav>

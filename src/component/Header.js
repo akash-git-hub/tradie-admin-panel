@@ -13,7 +13,7 @@ const Header = () => {
             className="rounded-circle border border-warning p-1"
           />
           <div className="text-start">
-            <div className="fw-semibold">Jackson D.</div>
+            <div className="fw-semibold">TRADIE</div>
             <small className="text-warning">Admin</small>
           </div>
         </div>

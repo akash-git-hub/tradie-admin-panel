@@ -79,3 +79,34 @@ export const login = async (data) => {
     const path = "login";
     return await postRequest(path, data);
 };
+
+
+export const getCustomersAPI = async ({ page, search = "", limit }) => {
+    const path = `customer?search=${search}&page=${page}&limit=${limit}`;
+    return await getRequest(path);
+}
+
+export const getCustomerDetailAPI = async ({ id }) => {
+    const path = `customer/${id}`;
+    return await getRequest(path);
+}
+
+export const getProjectsAPI = async ({ page }) => {
+    const path = `project?page=${page}`;
+    return await getRequest(path);
+}
+
+export const getProjectDetailAPI = async ({ id }) => {
+    const path = `project/${id}`;
+    return await getRequest(path);
+}
+
+export const getContractorsAPI = async ({ page }) => {
+    const path = `contractor?page=${page}`;
+    return await getRequest(path);
+}
+
+export const getContractorDetailAPI = async ({ id }) => {
+    const path = `contractor/${id}`;
+    return await getRequest(path);
+}

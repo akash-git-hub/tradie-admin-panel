@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Stack } from "react-bootstrap";
 import MailIcon from "../Icon/MailIcon";
 import ShieldIcon from "../Icon/ShieldIcon";
 import EyeIcon from "../Icon/EyeIcon";
@@ -8,7 +8,9 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../states/AuthContext";
 import { login } from "../services/NetworkCall";
 import { errorAlert, successAlert } from "../component/Alert";
-import { NewInputField } from "../component/InputFields";
+import { InputField } from "../component/InputField";
+import { Checkbox } from "../component/Checkbox";
+import { Loader } from "../component/Loader";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -22,16 +24,6 @@ const Login = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    const [form, setForm] = useState({
-        email: ""
-    });
-
-    const handleChange = (e) => {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value
-        });
-    };
 
     const inputHandler = (e) => {
         const { name, value } = e.target;
@@ -64,7 +56,7 @@ const Login = () => {
         let isValid = 1;
 
         if (!inData.emailOrMobile) {
-            setError((prev) => ({ ...prev, email: "Required *" }));
+            setError((prev) => ({ ...prev, emailOrMobile: "Required *" }));
             isValid = 2;
         }
 
@@ -89,7 +81,7 @@ const Login = () => {
                 localStorage.setItem("authToken", `${res.data.token}`);
                 localStorage.setItem("profileData", JSON.stringify(res.data));
                 successAlert({ message: res.message });
-                navigate("/dashboard", { replace: true });
+                navigate("/customers", { replace: true });
             } else {
                 errorAlert({ message: res.message });
             }
@@ -98,6 +90,7 @@ const Login = () => {
     };
     return (
         <div>
+            <Loader show={loading} />
             <Container fluid className="login-wrapper">
                 <Row className="justify-content-center align-items-center min-vh-100">
                     <Col xs={11} sm={8} md={6} lg={4} xl={3} className="text-center">
@@ -108,34 +101,50 @@ const Login = () => {
                         />
                         <h2 className="login-title mb-4">LOGIN</h2>
                         <Form onSubmit={submitHandler}>
-                            <NewInputField
+                            <InputField
                                 FormLabel="Email Address / Mobile Number"
                                 FormType="text"
-                                name="email"
-                                FormPlaceHolder="Enter email"
-                                value={form.email}
-                                onChange={handleChange}
+                                name="emailOrMobile"
+                                FormPlaceHolder="Enter email OR Mobile"
+                                value={inData?.emailOrMobile}
+                                onChange={inputHandler}
+                                error={error?.emailOrMobile}
                                 startIcon={<MailIcon />}
                             />
-                            <NewInputField
+                            <InputField
                                 FormLabel="Password"
-                                FormType="text"
+                                FormType={showPassword ? "text" : "password"}
                                 name="password"
                                 FormPlaceHolder="Enter password"
-                                value={form.password}
-                                onChange={handleChange}
+                                value={inData?.password}
+                                error={error?.password}
+                                onChange={inputHandler}
                                 startIcon={<ShieldIcon />}
-                                endIcon={<EyeIcon />}
+                                endIcon={showPassword ? (
+                                    <EyeIcon
+                                        className="text-secondary cursor-pointer"
+                                        onClick={togglePasswordVisibility}
+                                    />
+                                ) : (
+                                    <EyeSlashIcon
+                                        className="text-secondary cursor-pointer"
+                                        onClick={togglePasswordVisibility}
+                                    />
+                                )}
+                            // endIcon={<EyeIcon />}
                             />
-                            <div className="d-flex justify-content-between align-items-center mb-4">
-                                <Form.Check
-                                    type="checkbox"
-                                    label="Remember me"
-                                    className="remember-check"
-                                    style={{ accentColor: "#d9b04c" }}
+                            <Stack direction="horizontal" className='justify-content-between mt-3 mb-4' gap={3}>
+                                <Checkbox
+                                    type={"CheckBox"}
+                                    className={"remember-check"}
+                                    checked={inData.reminder}
+                                    name={"reminder"}
+                                    label={"Remember me"}
+                                    id={'custom-check'}
+                                    onClick={checkHandler}
                                 />
                                 <span className="forgot-link">Forgot password?</span>
-                            </div>
+                            </Stack>
                             <Button className="login-btn w-100" type="submit">
                                 Log In
                             </Button>

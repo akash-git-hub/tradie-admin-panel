@@ -6,7 +6,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 
-export const NewInputField = ({
+export const InputField = ({
     pattern = "",
     FormLabel = "",
     FormType = "",
@@ -108,11 +108,11 @@ export const NewInputField = ({
                         max={max}
                         size={size}
                         disabled={disabled}
-                        className={className ? className : "custom-input"}
+                        className={className ? className : "custom-input rounded"}
                         rows={isTextArea ? rows : undefined}
                     />
                     {endIcon && (
-                        <InputGroup.Text className="Input-Group-Icon">
+                        <InputGroup.Text className="Input-Group-Icon end-0">
                             {endIcon}
                         </InputGroup.Text>
                     )}
