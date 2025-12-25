@@ -26,7 +26,7 @@ const Sidebar = ({ active, onLinkClick }) => {
     <div
       className="d-flex flex-column vh-100 px-3 py-4"
       style={{
-        width: 280,
+        width: 300,
         background: "#FBF5E6",
         borderRight: "1px solid #e6d6a8",
         overflowY: "auto",

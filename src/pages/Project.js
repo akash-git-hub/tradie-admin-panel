@@ -1,7 +1,12 @@
+import { useState } from "react";
 import { Badge } from "react-bootstrap";
+import Sidebar from "../component/Sidebar";
+import Header from "../component/Header";
 import ReusableTable from "../component/ReuseableTable";
 
 const Projects = () => {
+  const [active, setActive] = useState("Project");
+
   const columns = [
     { label: "S NO", key: "id" },
     { label: "CUSTOMER NAME", key: "customer" },
@@ -46,57 +51,22 @@ const Projects = () => {
       date: "Oct 30, 2025",
       status: "Complete",
     },
-    {
-      id: "00003",
-      customer: "Rosie Pearson",
-      project: "979 Immanuel Ferry Suite 526",
-      contractor: "Iva Ryan",
-      type: "Plumbing",
-      date: "Oct 30, 2025",
-      status: "Complete",
-    },
-    {
-      id: "00004",
-      customer: "Rosie Pearson",
-      project: "979 Immanuel Ferry Suite 526",
-      contractor: "Iva Ryan",
-      type: "Plumbing",
-      date: "Oct 30, 2025",
-      status: "Complete",
-    },
-    {
-      id: "00005",
-      customer: "Rosie Pearson",
-      project: "979 Immanuel Ferry Suite 526",
-      contractor: "Iva Ryan",
-      type: "Plumbing",
-      date: "Oct 30, 2025",
-      status: "Complete",
-    },
-    {
-      id: "00006",
-      customer: "Rosie Pearson",
-      project: "979 Immanuel Ferry Suite 526",
-      contractor: "Iva Ryan",
-      type: "Plumbing",
-      date: "Oct 30, 2025",
-      status: "Complete",
-    },
-    {
-      id: "00007",
-      customer: "Rosie Pearson",
-      project: "979 Immanuel Ferry Suite 526",
-      contractor: "Iva Ryan",
-      type: "Plumbing",
-      date: "Oct 30, 2025",
-      status: "Complete",
-    },
   ];
 
   return (
-    <div className="p-4">
-      <h4 className="fw-bold mb-4">Projects</h4>
-      <ReusableTable columns={columns} data={data} />
+    <div className="d-flex min-vh-100">
+      {/* ================= SIDEBAR ================= */}
+      <Sidebar active={active} onLinkClick={setActive} />
+
+      {/* ================= RIGHT CONTENT ================= */}
+      <div className="flex-grow-1 text-start">
+        <Header />
+
+        <div className="p-4">
+          <h4 className="fw-bold mb-4">Projects</h4>
+          <ReusableTable columns={columns} data={data} />
+        </div>
+      </div>
     </div>
   );
 };

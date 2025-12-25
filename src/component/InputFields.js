@@ -4,7 +4,7 @@ import { InputGroup } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { CalenderIcon } from './Icons/CalenderIcon';
+
 
 export const NewInputField = ({
     pattern = "",
@@ -24,6 +24,7 @@ export const NewInputField = ({
     className = "",
     minLength = "",
     maxLength = "",
+    startIcon,
     endIcon,
     rows,
     size,
@@ -74,7 +75,7 @@ export const NewInputField = ({
                         minDate={min ? new Date(min) : null}
                     />
                     <div className='position-absolute end-0 p-1 top-0 cursor-pointer' onClick={handleIconClick}>
-                        <CalenderIcon onChange={handleDateChange} />
+                        {/* <CalenderIcon onChange={handleDateChange} /> */}
                     </div>
                 </>)
                     :
@@ -88,6 +89,11 @@ export const NewInputField = ({
                     />
             ) : (
                 <InputGroup>
+                    {startIcon && (
+                        <InputGroup.Text className="Input-Group-Icon">
+                            {startIcon}
+                        </InputGroup.Text>
+                    )}
                     <Form.Control
                         as={isTextArea ? 'textarea' : 'input'}
                         type={isTextArea ? undefined : FormType}

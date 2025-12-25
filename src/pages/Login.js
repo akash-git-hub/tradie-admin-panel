@@ -1,40 +1,54 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import MailIcon from '../Icon/MailIcon';
-import ShieldIcon from '../Icon/ShieldIcon';
-import EyeIcon from '../Icon/EyeIcon';
-import EyeSlashIcon from '../Icon/EyeSlashIcon';
-import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../states/AuthContext';
-import { login } from '../services/NetworkCall';
-import { errorAlert, successAlert } from '../component/Alert';
+import MailIcon from "../Icon/MailIcon";
+import ShieldIcon from "../Icon/ShieldIcon";
+import EyeIcon from "../Icon/EyeIcon";
+import EyeSlashIcon from "../Icon/EyeSlashIcon";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../states/AuthContext";
+import { login } from "../services/NetworkCall";
+import { errorAlert, successAlert } from "../component/Alert";
+import { NewInputField } from "../component/InputFields";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const { setLoggedIn, setProfileData } = useContext(AuthContext);
-    const [inData, setInData] = useState({ "emailOrMobile": localStorage.getItem("myEmailOrMobile"), "password": localStorage.getItem("myPassword"), "reminder": localStorage.getItem("myReminder") === "true" });
-    const [error, setError] = useState({ "emailOrMobile": "", "password": "" });
+    const [inData, setInData] = useState({
+        emailOrMobile: localStorage.getItem("myEmailOrMobile"),
+        password: localStorage.getItem("myPassword"),
+        reminder: localStorage.getItem("myReminder") === "true",
+    });
+    const [error, setError] = useState({ emailOrMobile: "", password: "" });
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
+    const [form, setForm] = useState({
+        email: ""
+    });
+
+    const handleChange = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        });
+    };
 
     const inputHandler = (e) => {
         const { name, value } = e.target;
         setInData((pre) => ({ ...pre, [name]: value }));
         setError((pre) => ({ ...pre, [name]: "" }));
-    }
+    };
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
-    }
+    };
 
     const checkHandler = (e) => {
         const { name, checked } = e.target;
         setInData((pre) => ({ ...pre, [name]: checked }));
-    }
+    };
 
     const submitHandler = async (e) => {
-
         e.preventDefault();
 
         if (inData.reminder) {
@@ -47,7 +61,6 @@ const Login = () => {
             localStorage.removeItem("myPassword");
         }
 
-
         let isValid = 1;
 
         if (!inData.emailOrMobile) {
@@ -56,16 +69,16 @@ const Login = () => {
         }
 
         if (!inData.password) {
-            setError((pre) => ({ ...pre, 'password': "Required *" }));
+            setError((pre) => ({ ...pre, password: "Required *" }));
             isValid = 4;
         }
 
         if (isValid === 1) {
             setLoading(true);
             const payload = {
-                "emailOrMobile": inData.emailOrMobile,
-                "password": inData.password
-            }
+                emailOrMobile: inData.emailOrMobile,
+                password: inData.password,
+            };
 
             const res = await login(payload);
 
@@ -75,14 +88,14 @@ const Login = () => {
                 localStorage.setItem("loggedIn", "true");
                 localStorage.setItem("authToken", `${res.data.token}`);
                 localStorage.setItem("profileData", JSON.stringify(res.data));
-                successAlert({ message: res.message })
+                successAlert({ message: res.message });
                 navigate("/dashboard", { replace: true });
             } else {
                 errorAlert({ message: res.message });
             }
             setLoading(false);
         }
-    }
+    };
     return (
         <div>
             <Container fluid className="login-wrapper">
@@ -95,33 +108,25 @@ const Login = () => {
                         />
                         <h2 className="login-title mb-4">LOGIN</h2>
                         <Form onSubmit={submitHandler}>
-                            <Form.Group className="mb-3 text-start">
-                                <Form.Label>Email Address / Mobile Number</Form.Label>
-                                <div className="input-icon">
-                                    <MailIcon />
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="TradieAdmin@gmail.com"
-                                        required
-                                    />
-                                </div>
-                            </Form.Group>
-                            <Form.Group className="mb-3 text-start">
-                                <Form.Label>Password</Form.Label>
-                                <div className="input-icon">
-                                    <ShieldIcon />
-                                    <Form.Control
-                                        type={showPassword ? "text" : "password"}
-                                        placeholder="********"
-                                    />
-                                    <span
-                                        className="eye-icon"
-                                        onClick={togglePasswordVisibility}
-                                    >
-                                        {showPassword ? <EyeSlashIcon /> : <EyeIcon />}
-                                    </span>
-                                </div>
-                            </Form.Group>
+                            <NewInputField
+                                FormLabel="Email Address / Mobile Number"
+                                FormType="text"
+                                name="email"
+                                FormPlaceHolder="Enter email"
+                                value={form.email}
+                                onChange={handleChange}
+                                startIcon={<MailIcon />}
+                            />
+                            <NewInputField
+                                FormLabel="Password"
+                                FormType="text"
+                                name="password"
+                                FormPlaceHolder="Enter password"
+                                value={form.password}
+                                onChange={handleChange}
+                                startIcon={<ShieldIcon />}
+                                endIcon={<EyeIcon />}
+                            />
                             <div className="d-flex justify-content-between align-items-center mb-4">
                                 <Form.Check
                                     type="checkbox"
@@ -139,7 +144,7 @@ const Login = () => {
                 </Row>
             </Container>
         </div>
-    )
-}
+    );
+};
 
-export default Login
+export default Login;

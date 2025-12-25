@@ -2430,7 +2430,11 @@ progress {
     background-clip: padding-box;
     border: var(--bs-border-width) solid var(--bs-border-color);
     border-radius: var(--bs-border-radius);
-    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    height: 48px;
+    border-radius: 12px;
+    background: #f7f7f7;
+    border: none;
 }
 
 @media (prefers-reduced-motion:reduce) {
@@ -13977,13 +13981,21 @@ ul.pagination {
 }
 
 .nav-pills .nav-link {
-  border-radius: 999px;
-  padding: 10px 20px;
-  color: #000;
-  font-weight: 500;
+    border-radius: 999px;
+    padding: 10px 20px;
+    color: #000;
+    font-weight: 500;
 }
 
 .nav-pills .nav-link.active {
-  background-color: #E2B857;
-  color: #fff;
+    background-color: #E2B857;
+    color: #fff;
+}
+
+span.Input-Group-Icon.input-group-text{
+    border: 0;
+}
+
+.position-relative.w-100 {
+    text-align: left;
 }
