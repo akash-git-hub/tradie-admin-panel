@@ -13999,3 +13999,14 @@ span.Input-Group-Icon.input-group-text{
 .position-relative.w-100 {
     text-align: left;
 }
+
+.nav-pills .nav-link {
+  color: #1c1b1f;
+  border-radius: 999px;
+  font-weight: 500;
+}
+
+.nav-pills .nav-link.active {
+  background-color: #E6B84C;
+  color: #fff;
+}

@@ -3,11 +3,11 @@ import { Badge, Table } from "react-bootstrap";
 
 import Header from "../../component/Header";
 import Sidebar from "../../component/Sidebar";
-import ReusableTable from "../../component/ReuseableTable";
 import { getContractorsAPI } from "../../services/NetworkCall";
 import { errorAlert } from "../../component/Alert";
 import TablePagination from "../../component/TablePagination";
 import { Loader } from "../../component/Loader";
+import ChatIcon from "../../Icon/ChatIcon";
 
 const ContractorList = () => {
   const [loading, setLoading] = useState(false);
@@ -70,10 +70,11 @@ const ContractorList = () => {
                       <td className="small"> {data?.email} </td>
                       <td className="small">{data?.address}</td>
                       <td className="small">{data?.mobile_number}</td>
-                      <td className="small">MESSAGE</td>
+                      <td className="small"><ChatIcon/> MESSAGE</td>
                     </tr>
                   ))}
                 </tbody>
+                
               </Table>
             </div>
             {/* Pagination */}
