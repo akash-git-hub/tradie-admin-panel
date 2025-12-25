@@ -2,16 +2,16 @@ import { useState } from "react";
 import { Nav, Collapse } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-import CustomerIcon from "../../Icon/CustomerIcon";
-import DashboardIcon from "../../Icon/DashboardIcon";
-import ContractIcon from "../../Icon/ContractIcon";
-import ProjectIcon from "../../Icon/ProjectIcon";
-import ChatIcon from "../../Icon/ChatIcon";
-import LicenseIcon from "../../Icon/LicenseIcon";
-import SettingIcon from "../../Icon/SettingIcon";
-import LogoutIcon from "../../Icon/LogoutIcon";
-import BoxIcon from "../../Icon/BoxIcon";
-import RevenueIcon from "../../Icon/RevenueIcon";
+import CustomerIcon from "../Icon/CustomerIcon";
+import DashboardIcon from "../Icon/DashboardIcon";
+import ContractIcon from "../Icon/ContractIcon";
+import ProjectIcon from "../Icon/ProjectIcon";
+import ChatIcon from "../Icon/ChatIcon";
+import LicenseIcon from "../Icon/LicenseIcon";
+import SettingIcon from "../Icon/SettingIcon";
+import LogoutIcon from "../Icon/LogoutIcon";
+import BoxIcon from "../Icon/BoxIcon";
+import RevenueIcon from "../Icon/RevenueIcon";
 
 const Sidebar = ({ active, onLinkClick }) => {
   const [openRevenue, setOpenRevenue] = useState(false);

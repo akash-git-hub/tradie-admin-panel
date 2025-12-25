@@ -1,5 +1,5 @@
 import { Navbar, Container } from "react-bootstrap";
-import NotificationIcon from "../../Icon/NotificationIcon";
+import NotificationIcon from "../Icon/NotificationIcon";
 
 const Header = () => {
   return (
