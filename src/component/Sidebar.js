@@ -79,10 +79,10 @@ const Sidebar = () => {
 
         <Nav.Link
           onClick={() => handleLinkClick("/projects")}
-          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${pathname === "/projects" ? "bg-warning text-white fw-semibold" : "text-dark"
+          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${pathname === "/projects" || pathname === "/project-detail" ? "bg-warning text-white fw-semibold" : "text-dark"
             }`}
         >
-          <ProjectIcon color={pathname === "/projects" ? "#fff" : "#292D32"} />
+          <ProjectIcon color={pathname === "/projects" || pathname === "/project-detail" ? "#fff" : "#292D32"} />
           Project
         </Nav.Link>
 

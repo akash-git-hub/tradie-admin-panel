@@ -91,8 +91,8 @@ export const getCustomerDetailAPI = async ({ id }) => {
     return await getRequest(path);
 }
 
-export const getProjectsAPI = async ({ page }) => {
-    const path = `project?page=${page}`;
+export const getProjectsAPI = async ({ page, limit }) => {
+    const path = `project?page=${page}&limit=${limit}`;
     return await getRequest(path);
 }
 
@@ -101,8 +101,8 @@ export const getProjectDetailAPI = async ({ id }) => {
     return await getRequest(path);
 }
 
-export const getContractorsAPI = async ({ page }) => {
-    const path = `contractor?page=${page}`;
+export const getContractorsAPI = async ({ page, limit }) => {
+    const path = `contractor?page=${page}&limit=${limit}`;
     return await getRequest(path);
 }
 

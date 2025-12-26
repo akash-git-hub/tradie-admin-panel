@@ -8,11 +8,13 @@ import TablePagination from "../../component/TablePagination";
 import { errorAlert } from "../../component/Alert";
 import { STATUS_BADGE_MAP } from "../../helper/common_helper";
 import moment from "moment-timezone";
+import { useNavigate } from "react-router-dom";
 
 const Projects = () => {
   const [loading, setLoading] = useState(false);
   const [projectsData, setProjectsData] = useState([]);
   const [pagination, setPagination] = useState({ totalPages: 1, page: 1, limit: 10 })
+  const navigate = useNavigate();
 
   const fetchProjectsData = async (page = 1, limit = 10) => {
     setLoading(true);
@@ -54,6 +56,11 @@ const Projects = () => {
     );
   };
 
+
+  const handleRowClick = (id) => {
+    navigate("/project-detail", { state: { data: { id } } });
+  }
+
   return (
     <>
       <Loader show={loading} />
@@ -82,7 +89,11 @@ const Projects = () => {
                 </thead>
                 <tbody>
                   {projectsData && projectsData.map((data, index) => (
-                    <tr key={index}>
+                    <tr key={index}
+                      onClick={() => handleRowClick(data?.id)}
+                      style={{ cursor: "pointer" }}
+                      className="table-row-hover"
+                    >
                       <td className="small">
                         {(pagination.page - 1) * pagination.limit + index + 1}
                       </td>
