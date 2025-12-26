@@ -96,11 +96,11 @@ const Sidebar = () => {
         </Nav.Link>
 
         <Nav.Link
-          onClick={() => handleLinkClick("/license")}
-          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${pathname === "License" ? "bg-warning text-white fw-semibold" : "text-dark"
+          onClick={() => handleLinkClick("/license_verification")}
+          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${pathname === "/license_verification" ? "bg-warning text-white fw-semibold" : "text-dark"
             }`}
         >
-          <LicenseIcon color={pathname === "License" ? "#fff" : "#292D32"} />
+          <LicenseIcon color={pathname === "/license_verification" ? "#fff" : "#292D32"} />
           License Verification
         </Nav.Link>
 
@@ -119,14 +119,14 @@ const Sidebar = () => {
         <Collapse in={openRevenue}>
           <div className="ps-5 mt-2">
             <Nav.Link
-              onClick={() => handleLinkClick("Earnings", "/revenue/earnings")}
-              className={`text-dark small py-1 ${pathname === "Earnings" ? "text-warning fw-semibold" : ""}`}
+              onClick={() => handleLinkClick("/earning")}
+              className={`text-dark small py-1 ${pathname === "/earning" ? "text-warning fw-semibold" : ""}`}
             >
               Earnings
             </Nav.Link>
             <Nav.Link
-              onClick={() => handleLinkClick("Transaction History", "/revenue/transactions")}
-              className={`text-dark small py-1 ${pathname === "Transaction History" ? "text-warning fw-semibold" : ""}`}
+              onClick={() => handleLinkClick("/transaction_history")}
+              className={`text-dark small py-1 ${pathname === "/transaction_history" ? "text-warning fw-semibold" : ""}`}
             >
               Transaction History
             </Nav.Link>

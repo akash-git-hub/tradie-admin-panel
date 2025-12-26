@@ -3,16 +3,16 @@ import Sidebar from "../../component/Sidebar";
 import Header from "../../component/Header";
 import ReusableTable from "../../component/ReuseableTable";
 
-const TransactionHistory = () => {
+const Earning = () => {
   const [active, setActive] = useState("Customer");
 
   const columns = [
-    { label: "TRANSACTION ID", key: "id" },
+    { label: "S NO", key: "id" },
     { label: "CUSTOMER NAME", key: "customer" },
     { label: "CONTRACTOR NAME", key: "contractor" },
-    { label: "CONTACT NO", key: "contact" },
-    { label: "WORK", key: "work" },
+    { label: "PROJECT NAME", key: "project" },
     { label: "AMOUNT", key: "amount" },
+    { label: "PLATFORM FEE", key: "fee" },
   ];
 
   const data = [
@@ -20,64 +20,49 @@ const TransactionHistory = () => {
       id: "00001",
       customer: "Christine Brooks",
       contractor: "Christine Brooks",
-      address: "089 Kutch Green Apt. 448",
-      contact: "(830) 556-6651",
-      work: "Electric",
+      project: "089 Kutch Green Apt. 448",
       amount: "$1200",
+      fee: "$100"
     },
-    {
+     {
       id: "00002",
       customer: "Christine Brooks",
       contractor: "Christine Brooks",
-      address: "089 Kutch Green Apt. 448",
-      contact: "(830) 556-6651",
-      work: "Electric",
+      project: "089 Kutch Green Apt. 448",
       amount: "$1200",
+      fee: "$100"
     },
-    {
+     {
       id: "00003",
       customer: "Christine Brooks",
       contractor: "Christine Brooks",
-      address: "089 Kutch Green Apt. 448",
-      contact: "(830) 556-6651",
-      work: "Electric",
+      project: "089 Kutch Green Apt. 448",
       amount: "$1200",
+      fee: "$100"
     },
-    {
+     {
       id: "00004",
       customer: "Christine Brooks",
       contractor: "Christine Brooks",
-      address: "089 Kutch Green Apt. 448",
-      contact: "(830) 556-6651",
-      work: "Electric",
+      project: "089 Kutch Green Apt. 448",
       amount: "$1200",
+      fee: "$100"
     },
-    {
+     {
       id: "00005",
       customer: "Christine Brooks",
       contractor: "Christine Brooks",
-      address: "089 Kutch Green Apt. 448",
-      contact: "(830) 556-6651",
-      work: "Electric",
+      project: "089 Kutch Green Apt. 448",
       amount: "$1200",
+      fee: "$100"
     },
-    {
+     {
       id: "00006",
       customer: "Christine Brooks",
       contractor: "Christine Brooks",
-      address: "089 Kutch Green Apt. 448",
-      contact: "(830) 556-6651",
-      work: "Electric",
+      project: "089 Kutch Green Apt. 448",
       amount: "$1200",
-    },
-    {
-      id: "00007",
-      customer: "Christine Brooks",
-      contractor: "Christine Brooks",
-      address: "089 Kutch Green Apt. 448",
-      contact: "(830) 556-6651",
-      work: "Electric",
-      amount: "$1200",
+      fee: "$100"
     },
   ];
 
@@ -91,7 +76,7 @@ const TransactionHistory = () => {
         <Header />
 
         <div className="p-4">
-          <h4 className="fw-bold mb-4">Transaction History</h4>
+          <h4 className="fw-bold mb-4">Earnings</h4>
           <ReusableTable columns={columns} data={data} />
         </div>
       </div>
@@ -99,4 +84,4 @@ const TransactionHistory = () => {
   );
 };
 
-export default TransactionHistory;
+export default Earning;
