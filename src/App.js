@@ -8,6 +8,8 @@ import ProjectDetail from "./pages/project/ProjectDetail";
 import Auth from './services/Auth';
 import PublicAuth from "./services/PublicAuth";
 import TransactionHistory from "./pages/revenue/TransactionHistory";
+import Earning from "./pages/revenue/Earning";
+import LicenseVerification from "./pages/licenseVerification/LicenseVerification";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
           <Route path="/contractors" element={<ContractorList />} />
           <Route path="/project-detail" element={<ProjectDetail />} />
           <Route path="/transaction_history" element={<TransactionHistory />} />
+          <Route path="/earning" element={<Earning />} />
+          <Route path="/license_verification" element={<LicenseVerification />} />
         </Route>
       </Routes>
     </div>

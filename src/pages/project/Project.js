@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Badge, Table } from "react-bootstrap";
+import { Badge, Dropdown, Table } from "react-bootstrap";
 import Sidebar from "../../component/Sidebar";
 import Header from "../../component/Header";
 import { getProjectsAPI } from "../../services/NetworkCall";
@@ -13,6 +13,8 @@ import { useNavigate } from "react-router-dom";
 const Projects = () => {
   const [loading, setLoading] = useState(false);
   const [projectsData, setProjectsData] = useState([]);
+  const [statusFilter, setStatusFilter] = useState("All");
+
   const [pagination, setPagination] = useState({ totalPages: 1, page: 1, limit: 10 })
   const navigate = useNavigate();
 
@@ -40,6 +42,13 @@ const Projects = () => {
     }));
     fetchProjectsData(page, pagination.limit);
   }
+
+  const filteredProjects = statusFilter === "All"
+  ? projectsData
+  : projectsData?.filter(
+      (item) => item?.status?.toLowerCase() === statusFilter.toLowerCase()
+    );
+
 
   const getBadge = (status) => {
     const badge = STATUS_BADGE_MAP[status];
@@ -69,7 +78,34 @@ const Projects = () => {
         <div className="flex-grow-1 text-start">
           <Header />
           <div className="p-4">
-            <h4 className="fw-bold mb-4">Projects</h4>
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <h4 className="fw-bold mb-0">Projects</h4>
+
+              <Dropdown>
+                <Dropdown.Toggle variant="outline-secondary" size="sm">
+                  {statusFilter === "All" ? "Filter by Status" : statusFilter}
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item onClick={() => setStatusFilter("All")}>
+                    All
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={() => setStatusFilter("Posted")}>
+                    Posted
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={() => setStatusFilter("Assigned")}>
+                    Assigned
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={() => setStatusFilter("InProgress")}>
+                    InProgress
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={() => setStatusFilter("Completed")}>
+                    Completed
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
+
             <div className="table-responsive border rounded-4" style={{
               maxHeight: "600px",
               overflowY: "auto",
@@ -97,16 +133,21 @@ const Projects = () => {
                       <td className="small">
                         {(pagination.page - 1) * pagination.limit + index + 1}
                       </td>
-                      <td className="small"> {data?.customer} </td>
-                      <td className="small"> {data?.title} </td>
+                      <td className="small">{data?.customer}</td>
+                      <td className="small">{data?.title}</td>
                       <td className="small">{data?.contractor}</td>
-                      <td className="small">{data?.createdAt
-                        ? moment(data.createdAt).local().format("MMM D, YYYY")
-                        : ""}</td>
-                      <td className="small">{data?.status && getBadge(data?.status)}</td>
+                      <td className="small">
+                        {data?.createdAt
+                          ? moment(data.createdAt).local().format("MMM D, YYYY")
+                          : ""}
+                      </td>
+                      <td className="small">
+                        {data?.status && getBadge(data?.status)}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
+
               </Table>
             </div>
             {/* Pagination */}
