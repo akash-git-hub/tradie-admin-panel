@@ -17,3 +17,7 @@
   width: 100%;
   height: 100vh;
 }
+
+.scrollbar-w-thin{
+  scrollbar-width: thin;
+}

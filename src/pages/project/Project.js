@@ -6,9 +6,10 @@ import { getProjectsAPI } from "../../services/NetworkCall";
 import { Loader } from "../../component/Loader";
 import TablePagination from "../../component/TablePagination";
 import { errorAlert } from "../../component/Alert";
-import { STATUS_BADGE_MAP } from "../../helper/common_helper";
+import { PROJECT_STATUS_OPTIONS, STATUS_BADGE_MAP } from "../../helper/common_helper";
 import moment from "moment-timezone";
 import { useNavigate } from "react-router-dom";
+import StatusFilterDropdown from "../../component/StatusFilterDropdown";
 
 const Projects = () => {
   const [loading, setLoading] = useState(false);
@@ -18,9 +19,12 @@ const Projects = () => {
   const [pagination, setPagination] = useState({ totalPages: 1, page: 1, limit: 10 })
   const navigate = useNavigate();
 
-  const fetchProjectsData = async (page = 1, limit = 10) => {
+  const fetchProjectsData = async (page = 1, limit = 10, status = statusFilter) => {
+    const payload = {
+      page, limit, status: statusFilter === "All" ? "" : statusFilter
+    }
     setLoading(true);
-    const res = await getProjectsAPI({ page, limit });
+    const res = await getProjectsAPI(payload);
     if (res.success) {
       setProjectsData(res.data);
       setPagination(prevPagination => ({
@@ -33,21 +37,15 @@ const Projects = () => {
     setLoading(false);
   }
 
-  useEffect(() => { fetchProjectsData(pagination.page, pagination.limit) }, [pagination.page])
+  useEffect(() => { fetchProjectsData(pagination.page, pagination.limit, statusFilter) }, [pagination.page, statusFilter])
 
   const pageHandler = (page) => {
     setPagination(prevPagination => ({
       ...prevPagination,
       page: page
     }));
-    fetchProjectsData(page, pagination.limit);
+    fetchProjectsData(page, pagination.limit, statusFilter);
   }
-
-  const filteredProjects = statusFilter === "All"
-  ? projectsData
-  : projectsData?.filter(
-      (item) => item?.status?.toLowerCase() === statusFilter.toLowerCase()
-    );
 
 
   const getBadge = (status) => {
@@ -80,30 +78,11 @@ const Projects = () => {
           <div className="p-4">
             <div className="d-flex justify-content-between align-items-center mb-3">
               <h4 className="fw-bold mb-0">Projects</h4>
-
-              <Dropdown>
-                <Dropdown.Toggle variant="outline-secondary" size="sm">
-                  {statusFilter === "All" ? "Filter by Status" : statusFilter}
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                  <Dropdown.Item onClick={() => setStatusFilter("All")}>
-                    All
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={() => setStatusFilter("Posted")}>
-                    Posted
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={() => setStatusFilter("Assigned")}>
-                    Assigned
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={() => setStatusFilter("InProgress")}>
-                    InProgress
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={() => setStatusFilter("Completed")}>
-                    Completed
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
+              <StatusFilterDropdown
+                value={statusFilter}
+                options={PROJECT_STATUS_OPTIONS}
+                onChange={setStatusFilter}
+              />
             </div>
 
             <div className="table-responsive border rounded-4" style={{

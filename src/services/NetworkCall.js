@@ -91,8 +91,8 @@ export const getCustomerDetailAPI = async ({ id }) => {
     return await getRequest(path);
 }
 
-export const getProjectsAPI = async ({ page, limit }) => {
-    const path = `project?page=${page}&limit=${limit}`;
+export const getProjectsAPI = async ({ page, limit, status }) => {
+    const path = `project?page=${page}&limit=${limit}&status=${status}`;
     return await getRequest(path);
 }
 

@@ -1,4 +1,4 @@
-import { Container, Row, Col, Card, Badge, Nav, Tab, Image, Carousel } from "react-bootstrap";
+import { Container, Row, Col, Card, Badge, Nav, Tab, Image, Carousel, Stack } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import Header from "../../component/Header";
 import Sidebar from "../../component/Sidebar";
@@ -19,13 +19,14 @@ import { getProjectDetailAPI } from "../../services/NetworkCall";
 import { errorAlert } from "../../component/Alert";
 import moment from "moment-timezone";
 import { Loader } from "../../component/Loader";
+import { PROJECT_STATUS_POSTED } from "../../helper/common_helper";
 
 
 const ProjectDetail = () => {
   const [activeTab, setActiveTab] = useState("description");
   const [activeIndex, setActiveIndex] = useState(0);
   const location = useLocation();
-  const projectId = 54//location?.state?.data?.id;
+  const projectId = location?.state?.data?.id;
   const [projectData, setProjectData] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -43,37 +44,6 @@ const ProjectDetail = () => {
   useEffect(() => {
     fetchProjectsData()
   }, [location])
-
-
-  const milestones = [
-    {
-      title: "Milestone 01",
-      status: "started",
-      startDate: "01 DEC 2024",
-      endDate: "31 DEC 2024",
-      amount: 200,
-      description:
-        "Description text about something on this page that can be long or short.",
-    },
-    {
-      title: "Milestone 02",
-      status: "notStarted",
-      startDate: "01 JAN 2025",
-      endDate: "05 FEB 2025",
-      amount: 500,
-      description:
-        "Description text about something on this page that can be long or short.",
-    },
-    {
-      title: "Milestone 03",
-      status: "notStarted",
-      startDate: "10 FEB 2025",
-      endDate: "05 MAR 2025",
-      amount: 500,
-      description:
-        "Description text about something on this page that can be long or short.",
-    },
-  ];
 
   const payments = [
     {
@@ -99,13 +69,6 @@ const ProjectDetail = () => {
       status: "notStarted",
     },
   ];
-
-  const documents = [
-    { title: "Document 01" },
-    { title: "Document 02" },
-    { title: "Document 03" },
-  ];
-
 
 
   return (
@@ -153,16 +116,16 @@ const ProjectDetail = () => {
               </Col>
 
               <Col lg={7}>
-                <div className="d-flex justify-content-between mb-1">
+                <div className="d-flex justify-content-between mb-1 gap-3">
                   <div>
                     <h3 className="fw-bold text-start">{projectData?.title}</h3>
-                    <p className="text-muted ">
+                    <p className="text-muted text-start text-wrap">
                       {projectData?.address}
                     </p>
                   </div>
-                  <div className="text-end">
+                  <div className="text-end ">
                     ⭐ {projectData?.rating || 0}
-                    <div className="text-muted small">{projectData?.createdAt
+                    <div className="text-muted small text-nowrap">{projectData?.createdAt
                       ? moment(projectData.createdAt).local().format("MMM D, YYYY")
                       : ""}</div>
                   </div>
@@ -205,17 +168,23 @@ const ProjectDetail = () => {
 
 
                     {/* Contractor profile Card */}
-                    {projectData?.contractor &&
-                      <Col sm={6}>
+                    <Col sm={6}>
+                      {projectData?.contractor === null ? (
                         <UserCard
-                          name={projectData?.customer?.name}
-                          email={projectData?.customer?.email}
+                          showWaitingAssign={true}
+                          color="warning"
+                        />
+                      ) : projectData?.contractor ? (
+                        <UserCard
+                          name={projectData?.contractor?.name}
+                          email={projectData?.contractor?.email}
                           role="Contractor"
                           color="primary"
-                          avatar={projectData?.customer?.profile_url}
+                          avatar={projectData?.contractor?.profile_url}
                         />
-                      </Col>
-                    }
+                      ) : null}
+                    </Col>
+
                   </Row>
                 </Row>
 
@@ -234,21 +203,24 @@ const ProjectDetail = () => {
                   {activeTab !== "description" && <DescriptionIcon />}
                   Descriptions
                 </Nav.Link>
+                {projectData?.status && projectData?.status != PROJECT_STATUS_POSTED && <>
+                  <Nav.Link eventKey="milestone" className="d-flex align-items-center gap-2">
+                    <MilestoneIcon active={activeTab === "milestone"} />
+                    Milestone
+                  </Nav.Link>
 
-                <Nav.Link eventKey="milestone" className="d-flex align-items-center gap-2">
-                  <MilestoneIcon active={activeTab === "milestone"} />
-                  Milestone
-                </Nav.Link>
+                  <Nav.Link eventKey="payment" className="d-flex align-items-center gap-2">
+                    <PaymentIcon active={activeTab === "payment"} />
+                    Payment
+                  </Nav.Link>
 
-                <Nav.Link eventKey="payment" className="d-flex align-items-center gap-2">
-                  <PaymentIcon active={activeTab === "payment"} />
-                  Payment
-                </Nav.Link>
+                  <Nav.Link eventKey="documents" className="d-flex align-items-center gap-2">
+                    <LicenseIcon active={activeTab === "documents"} />
+                    Documents
+                  </Nav.Link>
+                </>
+                }
 
-                <Nav.Link eventKey="documents" className="d-flex align-items-center gap-2">
-                  <LicenseIcon active={activeTab === "documents"} />
-                  Documents
-                </Nav.Link>
               </Nav>
 
 
@@ -264,12 +236,21 @@ const ProjectDetail = () => {
               <Tab.Content className="mt-4">
                 <Tab.Pane eventKey="milestone">
                   <Card className="border-0 rounded-4 p-4 text-center">
-                    <Row className="g-4">
-                      {milestones.map((item, index) => (
-                        <Col key={index} xs={12} md={6} lg={4}>
-                          <MilestoneCard {...item} />
-                        </Col>
-                      ))}
+                    <Row >
+                      <Stack direction="horizontal" gap={4} className="justify-content-start overflow-x-scroll pb-4 scrollbar-w-thin">
+                        {projectData?.contractor?.milestones && projectData?.contractor?.milestones.map((item, index) => (
+                          <Col key={index} xs={12} md={6} lg={4}>
+                            <MilestoneCard
+                              name={item?.milestone_name}
+                              amount={item?.milestone_amount}
+                              description={item?.milestone_description}
+                              startDate={item?.milestone_start_date}
+                              endDate={item?.milestone_end_date}
+                              status={item?.status}
+                            />
+                          </Col>
+                        ))}
+                      </Stack>
                     </Row>
                   </Card>
                 </Tab.Pane>
