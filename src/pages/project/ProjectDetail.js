@@ -135,8 +135,8 @@ const ProjectDetail = () => {
                 <Row className="g-1 mb-2">
                   {projectData?.services?.map((service, index) => (
                     <Col sm={6} key={index}>
-                      <Card className="border-0 rounded-4 p-3 text-center">
-                        <div className="d-flex align-items-center gap-2">
+                      <Card className="border-0 rounded-4 p-3 text-center service-color">
+                        <div className="d-flex align-items-center gap-2 ">
                           <Image
                             src={service?.icon_url}
                             alt={service?.service_name}

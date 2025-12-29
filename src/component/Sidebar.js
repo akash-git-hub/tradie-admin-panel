@@ -87,11 +87,11 @@ const Sidebar = () => {
         </Nav.Link>
 
         <Nav.Link
-          onClick={() => handleLinkClick("Messages", "/messages")}
-          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${pathname === "Messages" ? "bg-warning text-white fw-semibold" : "text-dark"
+          onClick={() => handleLinkClick("/messages")}
+          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${pathname === "/messages" ? "bg-warning text-white fw-semibold" : "text-dark"
             }`}
         >
-          <ChatIcon color={pathname === "Messages" ? "#fff" : "#292D32"} />
+          <ChatIcon color={pathname === "/messages" ? "#fff" : "#292D32"} />
           Messages
         </Nav.Link>
 

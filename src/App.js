@@ -10,6 +10,8 @@ import PublicAuth from "./services/PublicAuth";
 import TransactionHistory from "./pages/revenue/TransactionHistory";
 import Earning from "./pages/revenue/Earning";
 import LicenseVerification from "./pages/licenseVerification/LicenseVerification";
+import ContractorProfile from "./pages/contractor/ContractorProfile";
+import ChatMessages from "./pages/messages/ChatMessages";
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
           <Route path="/transaction_history" element={<TransactionHistory />} />
           <Route path="/earning" element={<Earning />} />
           <Route path="/license_verification" element={<LicenseVerification />} />
+          <Route path="/contractor_profile" element={<ContractorProfile />} />
+          <Route path="/messages" element={<ChatMessages />} />
         </Route>
       </Routes>
     </div>
