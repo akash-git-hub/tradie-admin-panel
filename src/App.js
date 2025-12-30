@@ -12,6 +12,7 @@ import Earning from "./pages/revenue/Earning";
 import LicenseVerification from "./pages/licenseVerification/LicenseVerification";
 import ContractorProfile from "./pages/contractor/ContractorProfile";
 import ChatMessages from "./pages/messages/ChatMessages";
+import CustomerProfile from "./pages/customer/CustomerProfile";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/earning" element={<Earning />} />
           <Route path="/license_verification" element={<LicenseVerification />} />
           <Route path="/contractor_profile" element={<ContractorProfile />} />
+          <Route path="/customer_profile" element={<CustomerProfile />} />
           <Route path="/messages" element={<ChatMessages />} />
         </Route>
       </Routes>

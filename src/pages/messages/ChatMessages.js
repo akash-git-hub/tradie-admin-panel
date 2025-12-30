@@ -1,11 +1,15 @@
-import { Row, Col, Card, Image, Form, Button, Badge } from "react-bootstrap";
+import { Row, Col, Card, Image, Form, Button, Badge, InputGroup, Modal } from "react-bootstrap";
 import Sidebar from "../../component/Sidebar";
 import Header from "../../component/Header";
 import ImageIcon from "../../Icon/ImageIcon";
-import MicrophoneIcon from "../../Icon/MicrophoneIcon";
 import AttachmentIcon from "../../Icon/AttactmentIcon";
+import { useState } from "react";
+import AddUserIcon from "../../Icon/AddUserIcon";
+
 
 const ChatMessages = () => {
+    const [showAddUser, setShowAddUser] = useState(false);
+    const [selectedUser, setSelectedUser] = useState(null);
     const users = [
         { name: "David Elson", avatar: "https://i.pravatar.cc/40?img=1" },
         { name: "Corina McCoy", avatar: "https://i.pravatar.cc/40?img=2" },
@@ -13,6 +17,10 @@ const ChatMessages = () => {
         { name: "Kimberly Mast", avatar: "https://i.pravatar.cc/40?img=4" }
     ];
 
+    const handleOpenChat = (user) => {
+        setSelectedUser(user);
+        setShowAddUser(false);
+    };
     return (
         <div className="d-flex min-vh-100">
             <div className="sidebar-wrapper">
@@ -30,6 +38,20 @@ const ChatMessages = () => {
                             <Col lg={4} xl={3} className="h-100">
                                 <Card className="h-100 border-1 shadow-sm rounded-4">
                                     <Card.Body className="MessageChatBody p-2 overflow-auto">
+                                        <div className="d-flex justify-content-center mb-3 gap-2" style={{
+                                            alignItems: 'center'
+                                        }}>
+                                            <InputGroup className="">
+                                                <Form.Control
+                                                    placeholder="Search Contact"
+                                                    className="border-1 rounded-pill border-color-primary px-4"
+                                                />
+                                            </InputGroup>
+                                            <Button className="rounded-5" onClick={() => setShowAddUser(true)}>
+                                                <AddUserIcon />
+                                            </Button>
+                                        </div>
+
                                         {users.map((user, i) => (
                                             <div
                                                 key={i}
@@ -100,9 +122,6 @@ const ChatMessages = () => {
                                             <Button variant="link" className="p-0 text-muted">
                                                 <ImageIcon />
                                             </Button>
-                                            <Button variant="link" className="p-0 text-muted">
-                                                <MicrophoneIcon />
-                                            </Button>
                                             <Button variant="warning" className="rounded-pill px-4">
                                                 Send
                                             </Button>
@@ -115,7 +134,44 @@ const ChatMessages = () => {
                     </div>
                 </div>
             </div>
+            <Modal
+                show={showAddUser}
+                onHide={() => setShowAddUser(false)}
+                centered
+                size="sm"
+                backdrop="static"
+                className="add-user-modal"
+            >
+                <Modal.Body className="p-4 rounded-4">
+                    <InputGroup className="mb-3">
+                        <Form.Control
+                            placeholder="Search Contact"
+                            className="border-0 shadow-sm rounded-pill"
+                        />
+                    </InputGroup>
+                    <div className="user-list">
+                        {users.map((user, i) => (
+                            <div
+                                key={i}
+                                className="d-flex align-items-center gap-3 py-2 px-2 rounded-3 user-select-item"
+                                onClick={() => handleOpenChat(user)}
+                                style={{ cursor: "pointer" }}
+                            >
+                                <Image
+                                    src={user.avatar}
+                                    roundedCircle
+                                    width={36}
+                                    height={36}
+                                />
+                                <span className="fw-medium">{user.name}</span>
+                            </div>
+                        ))}
+                    </div>
+                </Modal.Body>
+            </Modal>
+
         </div>
+
     );
 };
 

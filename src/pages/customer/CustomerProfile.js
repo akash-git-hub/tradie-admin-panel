@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Row, Col, Badge, Image, Button } from "react-bootstrap";
+import { Card, Row, Col, Image, Button } from "react-bootstrap";
 import Header from "../../component/Header";
 import Sidebar from "../../component/Sidebar";
 import KitchenIcon from "../../Icon/KitchenIcon";
@@ -10,9 +10,18 @@ import ReviewSummary from "../../component/ReviewSummary";
 import ReviewModal from "../../component/ReviewModal";
 import SuspendUserModal from "../../component/SuspendUserModal";
 
-const ContractorProfile = () => {
+
+
+const CustomerProfile = () => {
     const [show, setShow] = useState(false);
     const [showSuspend, setShowSuspend] = useState(false);
+
+    const icons = {
+        Kitchen: <KitchenIcon size={24} />,
+        Bedroom: <BedRoomIcon size={24} />,
+        Flooring: <FlooringIcon size={24} />,
+        Electricity: <ElectricityIcon size={24} />,
+    };
 
     const galleryImages = [
         "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -27,17 +36,11 @@ const ContractorProfile = () => {
 
     ];
 
-    const icons = {
-        Kitchen: <KitchenIcon size={24} />,
-        Bedroom: <BedRoomIcon size={24} />,
-        Flooring: <FlooringIcon size={24} />,
-        Electricity: <ElectricityIcon size={24} />,
-    };
-
     const reviews = [
         { name: "John Smith", rating: 5, comment: "Excellent service" },
         { name: "Emma Watson", rating: 4, comment: "Very professional" },
     ];
+
     return (
         <div className="d-flex min-vh-100">
             <div className="sidebar-wrapper">
@@ -49,7 +52,7 @@ const ContractorProfile = () => {
                     <div className="d-flex align-items-center justify-content-between mb-4">
                         <div className="d-flex align-items-center">
                             <span className="me-2 fs-4 cursor-pointer">←</span>
-                            <h4 className="fw-bold mb-0">Contractor Profile</h4>
+                            <h4 className="fw-bold mb-0">Customer Profile</h4>
                         </div>
                         <Button variant="outline-danger" className="rounded-pill px-4" onClick={() => setShowSuspend(true)}>
                             Suspension
@@ -74,17 +77,15 @@ const ContractorProfile = () => {
                                         height={150}
                                         className="rounded-5"
                                     />
-
                                     <div className="text-start d-flex flex-column gap-1">
-                                        <h4 className="fw-bold mb-1">Duane Dean</h4>
-                                        <strong className="mb-1 text-muted">rusty.botsford@wilfrid.io</strong>
+                                        <h4 className="fw-bold mb-1">Patricia Sanders</h4>
+                                        <strong className="mb-1 text-muted">
+                                            rusty.botsford@wilfrid.io
+                                        </strong>
                                         <h6 className="mb-1 text-muted">
                                             1341 Poplar Street, Chicago, IL 60606
                                         </h6>
                                         <p className="mb-1 text-muted">+91-8989786510</p>
-                                        <h5 className="text-success fw-semibold">
-                                            Contractor Licence
-                                        </h5>
                                     </div>
                                 </div>
                                 <h6 className="fw-bold mb-2 text-start">Services</h6>
@@ -103,7 +104,7 @@ const ContractorProfile = () => {
                                     )}
                                 </Row>
                                 <div>
-                                    <h6 className="fw-bold mb-2 text-start">Who we are</h6>
+                                    <h6 className="fw-bold mb-2 text-start">Description</h6>
                                     <p className="text-muted text-start mb-0">
                                         Description text about something on this page that can be
                                         long or short. It can be pretty long and explaining
@@ -148,4 +149,4 @@ const ContractorProfile = () => {
     );
 };
 
-export default ContractorProfile;
+export default CustomerProfile;
