@@ -14071,6 +14071,7 @@ button.btn.btn-outline-secondary:hover {
     max-width: 100%;
 }
 
+
 /* sent → right */
 .message-wrapper.sent {
     /* align-self: flex-end; */
@@ -14079,7 +14080,7 @@ button.btn.btn-outline-secondary:hover {
 
 /* received → left */
 .message-wrapper.received {
-    align-self: flex-start;
+    /* align-self: flex-start; */
     text-align: left;
 }
 
