@@ -327,7 +327,7 @@ const ChatMessages = () => {
                                             <InputGroup>
                                                 <Form.Control
                                                     placeholder="Search Contact"
-                                                    className="border-1 rounded-pill px-4"
+                                                    className="border-1 rounded-pill px-4 search_class"
                                                     value={chatUserSearch}
                                                     onChange={handleChatUserSearch}
                                                 />
@@ -382,7 +382,9 @@ const ChatMessages = () => {
                             {/* CHAT PANEL */}
                             <Col lg={8} xl={9} className="h-100">
                                 <Card className="h-100 d-flex flex-column border-1 shadow-sm rounded-4">
-                                    <Card.Header className="bg-white border-0 d-flex align-items-center gap-3 border-bottom">
+                                    <Card.Header className="bg-white border-0 d-flex align-items-center gap-3 border-bottom py-4" style={{
+                                        borderRadius: '30px 30px 0px 0px'
+                                    }}>
                                         <h4 className="mb-0 fw-bold">
                                             {activeUser?.name || "Select a chat"}
                                         </h4>
@@ -467,8 +469,10 @@ const ChatMessages = () => {
                                         ))}
                                     </Card.Body>
 
-                                    <Card.Footer className="bg-white border-0 rounded-5">
-                                        <div className="chat-input-wrapper d-flex align-items-center gap-2 px-3 py-2">
+                                    <Card.Footer className="bg-white border-1" style={{
+                                        borderRadius: '0px 0px 30px 30px '
+                                    }}>
+                                        <div className="chat-input-wrapper d-flex align-items-center gap-2">
                                             <Form.Control
                                                 value={text}
                                                 onChange={(e) => setText(e.target.value)}
@@ -508,8 +512,8 @@ const ChatMessages = () => {
                                                 <ImageIcon />
                                             </Button>
                                             <Button
-                                                variant="warning"
-                                                className="rounded-pill px-4"
+                                                variant="primary"
+                                                className="rounded-2 px-4 text-white"
                                                 onClick={handleSend}
                                             >
                                                 Send
@@ -623,9 +627,10 @@ const ChatMessages = () => {
                         </Button>
 
                         <Button
-                            variant="warning"
+                            variant="primary"
                             disabled={uploading}
                             onClick={handleSendFile}
+                            className="text-white"
                         >
                             {uploading ? "Sending..." : "Send"}
                         </Button>

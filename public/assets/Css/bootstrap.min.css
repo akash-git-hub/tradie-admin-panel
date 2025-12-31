@@ -14106,3 +14106,14 @@ button.btn.btn-outline-secondary:hover {
 .bg-none{
     background: transparent;
 }
+
+.search_class {
+    background: transparent;
+    border: 1px solid #e2ac2f;
+    color: #e2ac2f;
+}
+
+
+input.chat-input {
+    background: transparent;
+}
