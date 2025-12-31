@@ -320,9 +320,9 @@ const ChatMessages = () => {
                     <div className="chat-wrapper flex-grow-1">
                         <Row className="g-3 h-100">
                             {/* LEFT PANEL */}
-                            <Col lg={4} xl={3} className="h-100">
+                            <Col lg={4} xl={3} className="">
                                 <Card className="h-100 border-1 shadow-sm rounded-4">
-                                    <Card.Body className="MessageChatBody p-2 overflow-auto">
+                                    <Card.Body className="MessageChatBody p-2 ">
                                         <div className="d-flex justify-content-center mb-3 gap-2">
                                             <InputGroup>
                                                 <Form.Control
@@ -347,27 +347,28 @@ const ChatMessages = () => {
                                         )}
 
                                         {error && <p className="text-danger">{error}</p>}
-
-                                        {!loadingUsers &&
-                                            filteredUsers.map((user) => (
-                                                <div
-                                                    key={user.id}
-                                                    onClick={() => openChat(user)}
-                                                    className={`d-flex align-items-center p-3 rounded-3 mb-2 user-item ${activeUser?.id === user.id ? "active" : ""
-                                                        }`}
-                                                    style={{ cursor: "pointer" }}
-                                                >
-                                                    <Image
-                                                        src={user.avatar}
-                                                        roundedCircle
-                                                        width={40}
-                                                        height={40}
-                                                    />
-                                                    <span className="ms-3 fw-medium">{user.name}</span>
-                                                    <span className="ms-auto">›</span>
-                                                </div>
-                                            ))
-                                        }
+                                        <div className="userchat">
+                                            {!loadingUsers &&
+                                                filteredUsers.map((user) => (
+                                                    <div
+                                                        key={user.id}
+                                                        onClick={() => openChat(user)}
+                                                        className={`d-flex align-items-center p-3 rounded-3 mb-2 user-item ${activeUser?.id === user.id ? "active" : ""
+                                                            }`}
+                                                        style={{ cursor: "pointer" }}
+                                                    >
+                                                        <Image
+                                                            src={user.avatar}
+                                                            roundedCircle
+                                                            width={40}
+                                                            height={40}
+                                                        />
+                                                        <span className="ms-3 fw-medium">{user.name}</span>
+                                                        <span className="ms-auto">›</span>
+                                                    </div>
+                                                ))
+                                            }
+                                        </div>
 
                                         {!loadingUsers && filteredUsers.length === 0 && (
                                             <div className="text-center text-muted py-3">
@@ -380,8 +381,8 @@ const ChatMessages = () => {
                             </Col>
 
                             {/* CHAT PANEL */}
-                            <Col lg={8} xl={9} className="h-100">
-                                <Card className="h-100 d-flex flex-column border-1 shadow-sm rounded-4">
+                            <Col lg={8} xl={9} className="">
+                                <Card className="d-flex flex-column border-1 shadow-sm rounded-4">
                                     <Card.Header className="bg-white border-0 d-flex align-items-center gap-3 border-bottom py-4" style={{
                                         borderRadius: '30px 30px 0px 0px'
                                     }}>
@@ -395,79 +396,70 @@ const ChatMessages = () => {
                                         )}
                                     </Card.Header>
 
-                                    <Card.Body className="chat-body overflow-auto">
-                                        {messages.map((m) => (
-                                            <div
-                                                key={m.id}
-                                                className={`message-wrapper ${m.sender_id === CURRENT_USER_ID ? "sent" : "received"
-                                                    }`}
-                                            >
-                                                <div
-                                                    className={`message ${m.sender_id === CURRENT_USER_ID ? "sent" : "received"
-                                                        }`}
-                                                >
-                                                    {m.message && <p className="mb-1">{m.message}</p>}
-
-                                                    {m.file && m.file_type?.startsWith("image/") && (
+                                    <Card.Body className="chat-body flex-grow-1 overflow-auto">
+                                        {activeUser ? (
+                                            messages.length > 0 ? (
+                                                messages.map((m) => (
+                                                    <div
+                                                        key={m.id}
+                                                        className={`message-wrapper ${m.sender_id === CURRENT_USER_ID ? "sent" : "received"
+                                                            }`}
+                                                    >
                                                         <div
-                                                            style={{
-                                                                position: "relative",
-                                                                maxWidth: "220px",
-                                                                minHeight: "120px",
-                                                            }}
+                                                            className={`message ${m.sender_id === CURRENT_USER_ID ? "sent" : "received"
+                                                                }`}
                                                         >
-                                                            {imageLoadingMap[m.id] !== false && (
-                                                                <div
-                                                                    className="d-flex align-items-center justify-content-center bg-light rounded"
-                                                                    style={{
-                                                                        position: "absolute",
-                                                                        inset: 0,
-                                                                        zIndex: 1,
-                                                                    }}
-                                                                >
-                                                                    <Spinner animation="border" size="sm" />
+                                                            {m.message && <p className="mb-1">{m.message}</p>}
+
+                                                            {/* IMAGE */}
+                                                            {m.file && m.file_type?.startsWith("image/") && (
+                                                                <div style={{ maxWidth: "220px", position: "relative" }}>
+                                                                    <Image
+                                                                        src={m.file}
+                                                                        fluid
+                                                                        rounded
+                                                                        onClick={() => window.open(m.file, "_blank")}
+                                                                        style={{ cursor: "pointer" }}
+                                                                    />
                                                                 </div>
                                                             )}
 
-                                                            <Image
-                                                                src={m.file}
-                                                                fluid
-                                                                rounded
-                                                                style={{
-                                                                    maxWidth: "220px",
-                                                                    cursor: "pointer",
-                                                                    opacity: imageLoadingMap[m.id] === false ? 1 : 0,
-                                                                    transition: "opacity 0.3s ease",
-                                                                }}
-                                                                onLoad={() => handleImageLoad(m.id)}
-                                                                onError={() => handleImageLoad(m.id)}
-                                                                onClick={() => window.open(m.file, "_blank")}
-                                                            />
+                                                            {/* PDF */}
+                                                            {m.file && m.file_type === "application/pdf" && (
+                                                                <div
+                                                                    className="d-flex align-items-center gap-2 p-2 rounded bg-light"
+                                                                    style={{ cursor: "pointer", maxWidth: "240px" }}
+                                                                    onClick={() => window.open(m.file, "_blank")}
+                                                                >
+                                                                    <span style={{ fontSize: "22px" }}>📄</span>
+                                                                    <div>
+                                                                        <div className="fw-medium">Document</div>
+                                                                        <small className="text-muted">Tap to open</small>
+                                                                    </div>
+                                                                </div>
+                                                            )}
                                                         </div>
-                                                    )}
 
-
-                                                    {m.file && m.file_type === "application/pdf" && (
-                                                        <div
-                                                            className="d-flex align-items-center gap-2 p-2 rounded bg-light"
-                                                            style={{ maxWidth: "240px", cursor: "pointer" }}
-                                                            onClick={() => window.open(m.file, "_blank")}
-                                                        >
-                                                            <span style={{ fontSize: "24px" }}>📄</span>
-                                                            <div className="text-truncate">
-                                                                <div className="fw-medium text-dark">Document.pdf</div>
-                                                                <small className="text-muted">Tap to open</small>
-                                                            </div>
-                                                        </div>
-                                                    )}
+                                                        <small className="time">
+                                                            {m.send_time?.toDate().toLocaleTimeString()}
+                                                        </small>
+                                                    </div>
+                                                ))
+                                            ) : (
+                                                <div className="h-100 d-flex align-items-center justify-content-center text-muted" >
+                                                    No messages yet
                                                 </div>
-
-                                                <small className="time">
-                                                    {m.send_time?.toDate().toLocaleTimeString()}
-                                                </small>
+                                            )
+                                        ) : (
+                                            // 👇 WHEN NO CHAT SELECTED
+                                            <div className="d-flex align-items-center justify-content-center" style={{
+                                                height: 'calc(100vh - 260px)'
+                                            }}>
+                                                <h5 className="text-muted">Select your chat</h5>
                                             </div>
-                                        ))}
+                                        )}
                                     </Card.Body>
+
 
                                     <Card.Footer className="bg-white border-1" style={{
                                         borderRadius: '0px 0px 30px 30px '
@@ -544,39 +536,43 @@ const ChatMessages = () => {
                             className="border-0 shadow-sm rounded-pill"
                         />
                     </InputGroup>
+                    <div className="userchat" style={{
+                            height: '400px'
+                    }}>
 
-                    {modelLoading && (
-                        <div className="text-center py-3">
-                            <Spinner animation="border" size="sm" />
-                        </div>
-                    )}
-
-                    {error && <p className="text-danger">{error}</p>}
-
-                    {!modelLoading && (
-                        allUserList.length === 0 ? (
-                            <div className="text-center text-muted py-3">
-                                User not found
+                        {modelLoading && (
+                            <div className="text-center py-3">
+                                <Spinner animation="border" size="sm" />
                             </div>
-                        ) : (
-                            allUserList.map((user) => (
-                                <div
-                                    key={user.id}
-                                    onClick={() => openChat(user)}
-                                    className="d-flex align-items-center gap-3 py-2 px-2 rounded-3"
-                                    style={{ cursor: "pointer" }}
-                                >
-                                    <Image
-                                        src={user?.avatar || "/default-avatar.png"}
-                                        roundedCircle
-                                        width={36}
-                                        height={36}
-                                    />
-                                    <span className="fw-medium">{user.name}</span>
+                        )}
+
+                        {error && <p className="text-danger">{error}</p>}
+
+                        {!modelLoading && (
+                            allUserList.length === 0 ? (
+                                <div className="text-center text-muted py-3">
+                                    User not found
                                 </div>
-                            ))
-                        )
-                    )}
+                            ) : (
+                                allUserList.map((user) => (
+                                    <div
+                                        key={user.id}
+                                        onClick={() => openChat(user)}
+                                        className="d-flex align-items-center gap-3 py-2 px-2 rounded-3"
+                                        style={{ cursor: "pointer" }}
+                                    >
+                                        <Image
+                                            src={user?.avatar || "/default-avatar.png"}
+                                            roundedCircle
+                                            width={36}
+                                            height={36}
+                                        />
+                                        <span className="fw-medium">{user.name}</span>
+                                    </div>
+                                ))
+                            )
+                        )}
+                    </div>
                 </Modal.Body>
             </Modal>
 

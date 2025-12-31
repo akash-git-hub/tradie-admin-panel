@@ -14073,7 +14073,7 @@ button.btn.btn-outline-secondary:hover {
 
 /* sent → right */
 .message-wrapper.sent {
-    align-self: flex-end;
+    /* align-self: flex-end; */
     text-align: right;
 }
 
@@ -14117,3 +14117,63 @@ button.btn.btn-outline-secondary:hover {
 input.chat-input {
     background: transparent;
 }
+
+.MessageChatBody {
+  height: calc(100vh - 260px);
+  display: flex;
+  flex-direction: column;
+}
+
+
+.userchat {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.userchat::-webkit-scrollbar {
+  width: 1px;
+}
+
+.userchat::-webkit-scrollbar-thumb {
+  background: #e2ac2f;
+  border-radius: 12px;
+}
+
+.chat-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  max-height: calc(100vh - 300px);
+}
+
+.chat-body::-webkit-scrollbar {
+  width: 0px;
+}
+.chat-body::-webkit-scrollbar-thumb {
+  background: #e2ac2f;
+  border-radius: 10px;
+}
+
+
+.chat-wrapper, .chat-body {
+  height: 100%;
+}
+
+.chat-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow-y: auto;
+  min-height: 535px;
+}
+
+.message-wrapper {
+  margin-bottom: 8px;
+}
+
+.message {
+  max-width: 70%;
+}
+
+
