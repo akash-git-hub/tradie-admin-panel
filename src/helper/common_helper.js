@@ -71,3 +71,8 @@ export const projectMileStoneStatusConfig = {
         label: "Completed",
     },
 };
+
+
+export const getConversationId = (user1, user2) => {
+    return [user1, user2].sort((a, b) => a - b).join("_");
+};

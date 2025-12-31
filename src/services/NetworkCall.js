@@ -110,3 +110,19 @@ export const getContractorDetailAPI = async ({ id }) => {
     const path = `contractor/${id}`;
     return await getRequest(path);
 }
+
+export const fetchChatMembersProfileAPI = async (data) => {
+    const path = `chat/users/profiles`
+    return await postRequest(path, data);
+}
+
+
+export const fetchUsersForChatAPI = async ({ search = "" }) => {
+    const path = `chat/users?search=${search}`;
+    return await getRequest(path)
+}
+
+export const uploadChatMediaAPI = async (data) => {
+    const path = `chat/contentUpload`;
+    return await postRequest(path, data);
+}

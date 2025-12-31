@@ -8,11 +8,13 @@ import { errorAlert } from "../../component/Alert";
 import TablePagination from "../../component/TablePagination";
 import { Loader } from "../../component/Loader";
 import MessageIcon from "../../Icon/MessageIcon";
+import { useNavigate } from "react-router-dom";
 
 const ContractorList = () => {
   const [loading, setLoading] = useState(false);
   const [contractorsData, setContractorsData] = useState([]);
-  const [pagination, setPagination] = useState({ totalPages: 1, page: 1, limit: 10 })
+  const [pagination, setPagination] = useState({ totalPages: 1, page: 1, limit: 10 });
+  const navigate = useNavigate();
 
   const fetchContractorsData = async (page = 1, limit = 10) => {
     setLoading(true);
@@ -37,6 +39,11 @@ const ContractorList = () => {
       page: page
     }));
     fetchContractorsData(page, pagination.limit);
+  }
+
+
+  const handleMessageButtonClick = (userId) => {
+    navigate("/messages", { state: { userId } })
   }
 
   return (
@@ -70,11 +77,18 @@ const ContractorList = () => {
                       <td className="small"> {data?.email} </td>
                       <td className="small">{data?.address}</td>
                       <td className="small">{data?.mobile_number}</td>
-                      <td className="small"><Button variant="outline-secondary"><MessageIcon/> MESSAGE</Button></td>
+                      <td className="small">
+                        <Button
+                          variant="outline-secondary"
+                          type="button"
+                          onClick={() => handleMessageButtonClick(data?.id)}>
+                          <MessageIcon /> MESSAGE
+                        </Button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
-                
+
               </Table>
             </div>
             {/* Pagination */}
