@@ -57,11 +57,10 @@ const Sidebar = () => {
       <Nav className="flex-column gap-2">
         <Nav.Link
           onClick={() => handleLinkClick("#")}
-          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${
-            pathname === "/dashboard"
-              ? "bg-warning text-white fw-semibold"
-              : "text-dark"
-          }`}
+          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${pathname === "/dashboard"
+            ? "bg-warning text-white fw-semibold"
+            : "text-dark"
+            }`}
         >
           <DashboardIcon
             color={pathname === "/dashboard" ? "#fff" : "#292D32"}
@@ -71,39 +70,38 @@ const Sidebar = () => {
 
         <Nav.Link
           onClick={() => handleLinkClick("/customers")}
-          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${
-            pathname === "/customers"
-              ? "bg-warning text-white fw-semibold"
-              : "text-dark"
-          }`}
+          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${pathname === "/customers" ||
+            pathname === "/customer-profile"
+            ? "bg-warning text-white fw-semibold"
+            : "text-dark"
+            }`}
         >
           <CustomerIcon
-            color={pathname === "/customers" ? "#fff" : "#292D32"}
+            color={pathname === "/customers" || pathname === "/customer-profile" ? "#fff" : "#292D32"}
           />
           Customer
         </Nav.Link>
 
         <Nav.Link
           onClick={() => handleLinkClick("/contractors")}
-          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${
-            pathname === "/contractors"
-              ? "bg-warning text-white fw-semibold"
-              : "text-dark"
-          }`}
+          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${pathname === "/contractors"
+            || pathname === "/contractor-profile"
+            ? "bg-warning text-white fw-semibold"
+            : "text-dark"
+            }`}
         >
           <ContractIcon
-            color={pathname === "/contractors" ? "#fff" : "#292D32"}
+            color={pathname === "/contractors" || pathname === "/contractor-profile" ? "#fff" : "#292D32"}
           />
           Contractor
         </Nav.Link>
 
         <Nav.Link
           onClick={() => handleLinkClick("/projects")}
-          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${
-            pathname === "/projects" || pathname === "/project-detail"
-              ? "bg-warning text-white fw-semibold"
-              : "text-dark"
-          }`}
+          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${pathname === "/projects" || pathname === "/project-detail"
+            ? "bg-warning text-white fw-semibold"
+            : "text-dark"
+            }`}
         >
           <ProjectIcon
             color={
@@ -117,11 +115,10 @@ const Sidebar = () => {
 
         <Nav.Link
           onClick={() => handleLinkClick("/messages")}
-          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${
-            pathname === "/messages"
-              ? "bg-warning text-white fw-semibold"
-              : "text-dark"
-          }`}
+          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${pathname === "/messages"
+            ? "bg-warning text-white fw-semibold"
+            : "text-dark"
+            }`}
         >
           <ChatIcon color={pathname === "/messages" ? "#fff" : "#292D32"} />
           Messages
@@ -129,11 +126,10 @@ const Sidebar = () => {
 
         <Nav.Link
           onClick={() => handleLinkClick("/license_verification")}
-          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${
-            pathname === "/license_verification"
-              ? "bg-warning text-white fw-semibold"
-              : "text-dark"
-          }`}
+          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${pathname === "/license_verification"
+            ? "bg-warning text-white fw-semibold"
+            : "text-dark"
+            }`}
         >
           <LicenseIcon
             color={pathname === "/license_verification" ? "#fff" : "#292D32"}
@@ -144,11 +140,10 @@ const Sidebar = () => {
         {/* Revenue */}
         <Nav.Link
           onClick={() => setOpenRevenue(!openRevenue)}
-          className={`d-flex align-items-center justify-content-between gap-3 px-4 py-3 sidebar-link ${
-            pathname === "Revenue"
-              ? "bg-warning text-white fw-semibold"
-              : "text-dark"
-          }`}
+          className={`d-flex align-items-center justify-content-between gap-3 px-4 py-3 sidebar-link ${pathname === "Revenue"
+            ? "bg-warning text-white fw-semibold"
+            : "text-dark"
+            }`}
         >
           <span className="d-flex align-items-center gap-3">
             <RevenueIcon color={pathname === "Revenue" ? "#fff" : "#292D32"} />
@@ -160,19 +155,17 @@ const Sidebar = () => {
           <div className="ps-5 mt-2">
             <Nav.Link
               onClick={() => handleLinkClick("/earning")}
-              className={`text-dark small py-1 ${
-                pathname === "/earning" ? "text-warning fw-semibold" : ""
-              }`}
+              className={`text-dark small py-1 ${pathname === "/earning" ? "text-warning fw-semibold" : ""
+                }`}
             >
               Earnings
             </Nav.Link>
             <Nav.Link
               onClick={() => handleLinkClick("/transaction_history")}
-              className={`text-dark small py-1 ${
-                pathname === "/transaction_history"
-                  ? "text-warning fw-semibold"
-                  : ""
-              }`}
+              className={`text-dark small py-1 ${pathname === "/transaction_history"
+                ? "text-warning fw-semibold"
+                : ""
+                }`}
             >
               Transaction History
             </Nav.Link>
@@ -180,9 +173,8 @@ const Sidebar = () => {
               onClick={() =>
                 handleLinkClick("Platform Fee", "/revenue/platform-fee")
               }
-              className={`text-dark small py-1 ${
-                pathname === "Platform Fee" ? "text-warning fw-semibold" : ""
-              }`}
+              className={`text-dark small py-1 ${pathname === "Platform Fee" ? "text-warning fw-semibold" : ""
+                }`}
             >
               Platform Fee
             </Nav.Link>
@@ -195,11 +187,10 @@ const Sidebar = () => {
 
         <Nav.Link
           onClick={() => handleLinkClick("Offers", "/offers")}
-          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${
-            pathname === "Offers"
-              ? "bg-warning text-white fw-semibold"
-              : "text-dark"
-          }`}
+          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${pathname === "Offers"
+            ? "bg-warning text-white fw-semibold"
+            : "text-dark"
+            }`}
         >
           <BoxIcon color={pathname === "Offers" ? "#fff" : "#292D32"} />
           Offers
@@ -207,11 +198,10 @@ const Sidebar = () => {
 
         <Nav.Link
           onClick={() => handleLinkClick("Settings", "/settings")}
-          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${
-            pathname === "Settings"
-              ? "bg-warning text-white fw-semibold"
-              : "text-dark"
-          }`}
+          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${pathname === "Settings"
+            ? "bg-warning text-white fw-semibold"
+            : "text-dark"
+            }`}
         >
           <SettingIcon color={pathname === "Settings" ? "#fff" : "#292D32"} />
           Settings

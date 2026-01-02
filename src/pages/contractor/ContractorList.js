@@ -46,6 +46,10 @@ const ContractorList = () => {
     navigate("/messages", { state: { userId } })
   }
 
+  const handleRawClick = (userId) => {
+    navigate("/contractor-profile", { state: { userId } });
+  }
+
   return (
     <>
       <Loader show={loading} />
@@ -69,7 +73,11 @@ const ContractorList = () => {
                 </thead>
                 <tbody>
                   {contractorsData && contractorsData.map((data, index) => (
-                    <tr key={index}>
+                    <tr
+                      key={index}
+                      onClick={() => handleRawClick(data?.id)}
+                      style={{ cursor: "pointer" }}
+                    >
                       <td className="small">
                         {(pagination.page - 1) * pagination.limit + index + 1}
                       </td>
@@ -81,7 +89,11 @@ const ContractorList = () => {
                         <Button
                           variant="outline-secondary"
                           type="button"
-                          onClick={() => handleMessageButtonClick(data?.id)}>
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleMessageButtonClick(data?.id);
+                          }}
+                        >
                           <MessageIcon /> MESSAGE
                         </Button>
                       </td>

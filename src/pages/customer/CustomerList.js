@@ -7,8 +7,10 @@ import { errorAlert } from "../../component/Alert";
 import { Table } from "react-bootstrap";
 import TablePagination from "../../component/TablePagination";
 import { Loader } from "../../component/Loader";
+import { useNavigate } from "react-router-dom";
 
 const CustomerList = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [customersData, setCustomersData] = useState([]);
   const [pagination, setPagination] = useState({ totalPages: 1, page: 1, limit: 10 })
@@ -38,6 +40,10 @@ const CustomerList = () => {
     fetchCustomersData(page, pagination.limit);
   }
 
+  const handleRawClick = (userId) => {
+    navigate("/customer-profile", { state: { userId } });
+  }
+
   return (
     <>
       <Loader show={loading} />
@@ -60,7 +66,11 @@ const CustomerList = () => {
                 </thead>
                 <tbody>
                   {customersData && customersData.map((data, index) => (
-                    <tr key={index}>
+                    <tr
+                      key={index}
+                      onClick={() => handleRawClick(data?.id)}
+                      style={{ cursor: "pointer" }}
+                    >
                       <td className="small">
                         {(pagination.page - 1) * pagination.limit + index + 1}
                       </td>

@@ -30,8 +30,8 @@ function App() {
           <Route path="/transaction_history" element={<TransactionHistory />} />
           <Route path="/earning" element={<Earning />} />
           <Route path="/license_verification" element={<LicenseVerification />} />
-          <Route path="/contractor_profile" element={<ContractorProfile />} />
-          <Route path="/customer_profile" element={<CustomerProfile />} />
+          <Route path="/contractor-profile" element={<ContractorProfile />} />
+          <Route path="/customer-profile" element={<CustomerProfile />} />
           <Route path="/messages" element={<ChatMessages />} />
         </Route>
       </Routes>
