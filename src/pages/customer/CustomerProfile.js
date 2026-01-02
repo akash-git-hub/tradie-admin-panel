@@ -9,7 +9,7 @@ import ElectricityIcon from "../../Icon/ElectricityIcon";
 import ReviewSummary from "../../component/ReviewSummary";
 import ReviewModal from "../../component/ReviewModal";
 import SuspendUserModal from "../../component/SuspendUserModal";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getCustomerDetailAPI } from "../../services/NetworkCall";
 import { errorAlert } from "../../component/Alert";
 import { Loader } from "../../component/Loader";
@@ -21,6 +21,7 @@ const CustomerProfile = () => {
     const [loading, setLoading] = useState(false);
     const id = location.state.userId;
     const [customerData, setCustomerData] = useState({});
+    const navigate = useNavigate();
 
     const fetchCustomersData = async () => {
         setLoading(true);
@@ -31,11 +32,11 @@ const CustomerProfile = () => {
             errorAlert({ message: res.message });
         }
         setLoading(false);
-    }
+    };
 
     useEffect(() => {
-        fetchCustomersData()
-    }, [location])
+        fetchCustomersData();
+    }, [location]);
 
     const icons = {
         Kitchen: <KitchenIcon size={24} />,
@@ -44,17 +45,36 @@ const CustomerProfile = () => {
         Electricity: <ElectricityIcon size={24} />,
     };
 
-    const galleryImages = [
-        "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 
+    const handleProjectClick = () => {
+        navigate("/project-detail");
+    };
+
+    const galleryImages = [
+        {
+            img: "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop",
+            name: "Living Room Renovation",
+        },
+        {
+            img: "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop",
+            name: "Modular Kitchen",
+        },
+        {
+            img: "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop",
+            name: "Bedroom Interior",
+        },
+        {
+            img: "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop",
+            name: "Living Room Renovation",
+        },
+        {
+            img: "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop",
+            name: "Modular Kitchen",
+        },
+        {
+            img: "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop",
+            name: "Bedroom Interior",
+        },
     ];
 
     const reviews = [
@@ -63,8 +83,8 @@ const CustomerProfile = () => {
     ];
 
     const handleBackButtonClick = () => {
-        window.history.back()
-    }
+        window.history.back();
+    };
 
     return (
         <>
@@ -78,10 +98,20 @@ const CustomerProfile = () => {
                     <div className="p-4">
                         <div className="d-flex align-items-center justify-content-between mb-4">
                             <div className="d-flex align-items-center">
-                                <span className="me-2 fs-4 cursor-pointer" style={{ cursor: "pointer" }} onClick={handleBackButtonClick}>←</span>
+                                <span
+                                    className="me-2 fs-4 cursor-pointer"
+                                    style={{ cursor: "pointer" }}
+                                    onClick={handleBackButtonClick}
+                                >
+                                    ←
+                                </span>
                                 <h4 className="fw-bold mb-0">Customer Profile</h4>
                             </div>
-                            <Button variant="outline-danger" className="rounded-pill px-4" onClick={() => setShowSuspend(true)}>
+                            <Button
+                                variant="outline-danger"
+                                className="rounded-pill px-4"
+                                onClick={() => setShowSuspend(true)}
+                            >
                                 Suspension
                             </Button>
                             <SuspendUserModal
@@ -113,7 +143,10 @@ const CustomerProfile = () => {
                                             <h6 className="mb-1 text-muted">
                                                 {customerData?.address?.address}
                                             </h6>
-                                            <p className="mb-1 text-muted">{customerData?.mobile_country_code}-{customerData?.mobile_number}</p>
+                                            <p className="mb-1 text-muted">
+                                                {customerData?.mobile_country_code}-
+                                                {customerData?.mobile_number}
+                                            </p>
                                         </div>
                                     </div>
                                     <h6 className="fw-bold mb-2 text-start">Services</h6>
@@ -123,7 +156,9 @@ const CustomerProfile = () => {
                                                 <Col sm={6} key={item}>
                                                     <Card className="border-1 rounded-4 p-3 text-center">
                                                         <div className="d-flex align-items-center gap-2">
-                                                            <span className="text-warning">{icons[item]}</span>
+                                                            <span className="text-warning">
+                                                                {icons[item]}
+                                                            </span>
                                                             <span>{item}</span>
                                                         </div>
                                                     </Card>
@@ -141,7 +176,7 @@ const CustomerProfile = () => {
                                     </div>
                                 </Col>
                                 <Col lg={6}>
-                                    <ReviewSummary
+                                    {/* <ReviewSummary
                                         totalReviews={25}
                                         rating={4.95}
                                         onClick={() => setShow(true)}
@@ -151,19 +186,31 @@ const CustomerProfile = () => {
                                         show={show}
                                         onClose={() => setShow(false)}
                                         reviews={reviews}
-                                    />
+                                    /> */}
                                     <Row className="g-2 px-5">
-                                        {galleryImages.map((img, index) => (
+                                        {galleryImages.map((item, index) => (
                                             <Col xs={4} key={index}>
                                                 <div
-                                                    className="rounded-3 overflow-hidden"
-                                                    style={{ height: "100px" }}
+                                                    className="cursor-pointer text-center"
+                                                    onClick={() => handleProjectClick(item.projectId)}
                                                 >
-                                                    <img
-                                                        src={img}
-                                                        alt="gallery"
-                                                        className="w-100 h-100 object-fit-cover"
-                                                    />
+                                                    <div
+                                                        className="rounded-3 overflow-hidden mb-1"
+                                                        style={{ height: "100px" }}
+                                                    >
+                                                        <img
+                                                            src={item.img}
+                                                            alt={item.name}
+                                                            className="w-100 h-100 object-fit-cover"
+                                                        />
+                                                    </div>
+
+                                                    <div
+                                                        className="small fw-medium text-truncate"
+                                                        title={item.name}
+                                                    >
+                                                        {item.name}
+                                                    </div>
                                                 </div>
                                             </Col>
                                         ))}
@@ -175,7 +222,6 @@ const CustomerProfile = () => {
                 </div>
             </div>
         </>
-
     );
 };
 

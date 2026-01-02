@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Card, Row, Col, Badge, Image, Button } from "react-bootstrap";
+import { Card, Row, Col, Image, Button } from "react-bootstrap";
 import Header from "../../component/Header";
 import Sidebar from "../../component/Sidebar";
-import KitchenIcon from "../../Icon/KitchenIcon";
-import BedRoomIcon from "../../Icon/BedroomIcon";
-import FlooringIcon from "../../Icon/FlooringIcon";
-import ElectricityIcon from "../../Icon/ElectricityIcon";
 import ReviewSummary from "../../component/ReviewSummary";
 import ReviewModal from "../../component/ReviewModal";
 import SuspendUserModal from "../../component/SuspendUserModal";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getContractorDetailAPI } from "../../services/NetworkCall";
 import { errorAlert } from "../../component/Alert";
 import { Loader } from "../../component/Loader";
@@ -37,26 +33,40 @@ const ContractorProfile = () => {
         fetchContractorData()
     }, [location])
 
+    const navigate = useNavigate();
+
+    const handleProjectClick = () => {
+        navigate("/project-detail");
+    };
+
 
     const galleryImages = [
-        "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-
+        {
+            img: "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop",
+            name: "Living Room Renovation",
+        },
+        {
+            img: "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop",
+            name: "Modular Kitchen",
+        },
+        {
+            img: "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop",
+            name: "Bedroom Interior",
+        },
+        {
+            img: "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop",
+            name: "Living Room Renovation",
+        },
+        {
+            img: "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop",
+            name: "Modular Kitchen",
+        },
+        {
+            img: "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?q=80&w=2070&auto=format&fit=crop",
+            name: "Bedroom Interior",
+        },
     ];
 
-    const icons = {
-        Kitchen: <KitchenIcon size={24} />,
-        Bedroom: <BedRoomIcon size={24} />,
-        Flooring: <FlooringIcon size={24} />,
-        Electricity: <ElectricityIcon size={24} />,
-    };
 
     const reviews = [
         { name: "John Smith", rating: 5, comment: "Excellent service" },
@@ -163,17 +173,29 @@ const ContractorProfile = () => {
                                         reviews={reviews}
                                     />
                                     <Row className="g-2 px-5">
-                                        {galleryImages.map((img, index) => (
+                                        {galleryImages.map((item, index) => (
                                             <Col xs={4} key={index}>
                                                 <div
-                                                    className="rounded-3 overflow-hidden"
-                                                    style={{ height: "100px" }}
+                                                    className="cursor-pointer text-center"
+                                                    onClick={() => handleProjectClick(item.projectId)}
                                                 >
-                                                    <img
-                                                        src={img}
-                                                        alt="gallery"
-                                                        className="w-100 h-100 object-fit-cover"
-                                                    />
+                                                    <div
+                                                        className="rounded-3 overflow-hidden mb-1"
+                                                        style={{ height: "100px" }}
+                                                    >
+                                                        <img
+                                                            src={item.img}
+                                                            alt={item.name}
+                                                            className="w-100 h-100 object-fit-cover"
+                                                        />
+                                                    </div>
+
+                                                    <div
+                                                        className="small fw-medium text-truncate"
+                                                        title={item.name}
+                                                    >
+                                                        {item.name}
+                                                    </div>
                                                 </div>
                                             </Col>
                                         ))}
