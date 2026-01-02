@@ -13978,6 +13978,7 @@ ul.pagination {
 .table-responsive table thead tr th {
     background: #e2ac2f;
     color: #fff;
+    width: 200px;
 }
 
 .nav-pills .nav-link {
@@ -14104,7 +14105,7 @@ button.btn.btn-outline-secondary:hover {
     background: #FCF6E9;
 }
 
-.bg-none{
+.bg-none {
     background: transparent;
 }
 
@@ -14120,61 +14121,61 @@ input.chat-input {
 }
 
 .MessageChatBody {
-  height: calc(100vh - 260px);
-  display: flex;
-  flex-direction: column;
+    height: calc(100vh - 260px);
+    display: flex;
+    flex-direction: column;
 }
 
 
 .userchat {
-  flex: 1;
-  overflow-y: auto;
-  padding-right: 4px;
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 4px;
 }
 
 .userchat::-webkit-scrollbar {
-  width: 1px;
+    width: 1px;
 }
 
 .userchat::-webkit-scrollbar-thumb {
-  background: #e2ac2f;
-  border-radius: 12px;
+    background: #e2ac2f;
+    border-radius: 12px;
 }
 
 .chat-body {
-  flex: 1;
-  overflow-y: auto;
-  padding: 16px;
-  max-height: calc(100vh - 300px);
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    max-height: calc(100vh - 300px);
 }
 
 .chat-body::-webkit-scrollbar {
-  width: 0px;
+    width: 0px;
 }
+
 .chat-body::-webkit-scrollbar-thumb {
-  background: #e2ac2f;
-  border-radius: 10px;
+    background: #e2ac2f;
+    border-radius: 10px;
 }
 
 
-.chat-wrapper, .chat-body {
-  height: 100%;
+.chat-wrapper,
+.chat-body {
+    height: 100%;
 }
 
 .chat-body {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  overflow-y: auto;
-  min-height: 535px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow-y: auto;
+    min-height: 535px;
 }
 
 .message-wrapper {
-  margin-bottom: 8px;
+    margin-bottom: 8px;
 }
 
 .message {
-  max-width: 70%;
+    max-width: 70%;
 }
-
-
