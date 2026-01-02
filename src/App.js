@@ -16,6 +16,9 @@ import CustomerProfile from "./pages/customer/CustomerProfile";
 import DisputeList from "./pages/Others/dispute/DisputeList";
 import ServiceList from "./pages/Others/services/ServiceList";
 import CreateService from "./pages/Others/services/CreateService";
+import LicenseVerificationDetail from "./pages/licenseVerification/LicenseVerificationDetail";
+import Offer from "./pages/offers/Offer";
+import PlatformSuspension from "./pages/platformSuspension/PlatformSuspension";
 
 function App() {
   return (
@@ -33,12 +36,15 @@ function App() {
           <Route path="/transaction_history" element={<TransactionHistory />} />
           <Route path="/earning" element={<Earning />} />
           <Route path="/license_verification" element={<LicenseVerification />} />
+          <Route path="/license_verification_detail" element={<LicenseVerificationDetail />} />
           <Route path="/contractor-profile" element={<ContractorProfile />} />
           <Route path="/customer-profile" element={<CustomerProfile />} />
           <Route path="/messages" element={<ChatMessages />} />
           <Route path="/dispute" element={<DisputeList />} />
           <Route path="/service_list" element={<ServiceList />} />
           <Route path="/create_service" element={<CreateService />} />
+          <Route path="/offer" element={<Offer />} />
+          <Route path="/platform_suspension" element={<PlatformSuspension/>} />
         </Route>
       </Routes>
     </div>

@@ -14198,3 +14198,19 @@ input.chat-input {
     border: 1px dashed #e2ac2f;
     border-radius: 10px;
 }
+
+
+.document-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 12px;
+  justify-content: start;
+}
+
+.document-grid img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+}

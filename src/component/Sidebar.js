@@ -13,6 +13,7 @@ import LogoutIcon from "../Icon/LogoutIcon";
 import BoxIcon from "../Icon/BoxIcon";
 import RevenueIcon from "../Icon/RevenueIcon";
 import { AuthContext } from "../states/AuthContext";
+import PlatformSuspensionIcon from "../Icon/PlatformSuspensionIcon";
 
 const Sidebar = () => {
   const [openRevenue, setOpenRevenue] = useState(false);
@@ -230,13 +231,13 @@ const Sidebar = () => {
         <span className="text-warning fw-semibold px-3 mb-2 text-start">About Us</span>
 
         <Nav.Link
-          onClick={() => handleLinkClick("Offers", "/offers")}
-          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${pathname === "Offers"
+          onClick={() => handleLinkClick("/offer")}
+          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${pathname === "/offer"
             ? "bg-warning text-white fw-semibold"
             : "text-dark"
             }`}
         >
-          <BoxIcon color={pathname === "Offers" ? "#fff" : "#292D32"} />
+          <BoxIcon color={pathname === "/offer" ? "#fff" : "#292D32"} />
           Offers
         </Nav.Link>
 
@@ -249,6 +250,17 @@ const Sidebar = () => {
         >
           <SettingIcon color={pathname === "Settings" ? "#fff" : "#292D32"} />
           Settings
+        </Nav.Link>
+
+        <Nav.Link
+          onClick={() => handleLinkClick("/platform_suspension")}
+          className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${pathname === "/platform_suspension"
+            ? "bg-warning text-white fw-semibold"
+            : "text-dark"
+            }`}
+        >
+          <PlatformSuspensionIcon color={pathname === "/platform_suspension" ? "#fff" : "#292D32"} />
+          Platform Suspension
         </Nav.Link>
 
         <Nav.Link
