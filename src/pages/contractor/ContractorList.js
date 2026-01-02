@@ -59,9 +59,14 @@ const ContractorList = () => {
           <Header />
           <div className="p-4">
             <h4 className="fw-bold mb-4">Contractor List</h4>
-            <div className="table-responsive border rounded-4 overflow-hidden">
+            <div className="table-responsive border rounded-4 " style={{
+              maxHeight: "600px",
+              overflowY: "auto",
+              border: "1px solid #d9b04c",
+              borderRadius: "0.5rem"
+            }}>
               <Table className="mb-0 align-middle">
-                <thead>
+                <thead style={{ position: "sticky", top: 0, background: "#d9b04c", zIndex: 1 }}>
                   <tr style={{ background: "#d9b04c" }}>
                     <th className="small fw-semibold">S NO</th>
                     <th className="small fw-semibold">NAME</th>
@@ -83,7 +88,7 @@ const ContractorList = () => {
                       </td>
                       <td className="small"> {data?.name} </td>
                       <td className="small"> {data?.email} </td>
-                      <td className="small">{data?.address}</td>
+                      <td className="small ">{data?.address}</td>
                       <td className="small">{data?.mobile_number}</td>
                       <td className="small">
                         <Button

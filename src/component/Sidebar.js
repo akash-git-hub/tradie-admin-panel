@@ -16,6 +16,7 @@ import { AuthContext } from "../states/AuthContext";
 
 const Sidebar = () => {
   const [openRevenue, setOpenRevenue] = useState(false);
+  const [openOther, setOpenOther] = useState(false);
   const { setLoggedIn, profileData, setProfileData } = useContext(AuthContext);
   const navigate = useNavigate();
   const pathname = useLocation().pathname;
@@ -35,7 +36,7 @@ const Sidebar = () => {
 
   return (
     <div
-      className="d-flex flex-column vh-100 px-3 py-4"
+      className="d-flex flex-column px-3 py-4"
       style={{
         width: 300,
         background: "#FBF5E6",
@@ -177,6 +178,49 @@ const Sidebar = () => {
                 }`}
             >
               Platform Fee
+            </Nav.Link>
+          </div>
+        </Collapse>
+
+        <Nav.Link
+          onClick={() => setOpenOther(!openOther)}
+          className={`d-flex align-items-center justify-content-between gap-3 px-4 py-3 sidebar-link ${pathname === "other"
+            ? "bg-warning text-white fw-semibold"
+            : "text-dark"
+            }`}
+        >
+          <span className="d-flex align-items-center gap-3">
+            <BoxIcon color={pathname === "other" ? "#fff" : "#292D32"} />
+            Others
+          </span>
+        </Nav.Link>
+
+        <Collapse in={openOther}>
+          <div className="ps-5 mt-2">
+            <Nav.Link
+              onClick={() => handleLinkClick("/service_list")}
+              className={`text-dark small py-1 ${pathname === "/service_list" ? "text-warning fw-semibold" : ""
+                }`}
+            >
+              Services
+            </Nav.Link>
+            <Nav.Link
+              onClick={() => handleLinkClick("/template")}
+              className={`text-dark small py-1 ${pathname === "/template"
+                ? "text-warning fw-semibold"
+                : ""
+                }`}
+            >
+              Templates
+            </Nav.Link>
+            <Nav.Link
+              onClick={() =>
+                handleLinkClick("/dispute")
+              }
+              className={`text-dark small py-1 ${pathname === "/dispute" ? "text-warning fw-semibold" : ""
+                }`}
+            >
+              Dispute
             </Nav.Link>
           </div>
         </Collapse>

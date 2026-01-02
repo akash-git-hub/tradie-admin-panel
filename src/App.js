@@ -13,6 +13,9 @@ import LicenseVerification from "./pages/licenseVerification/LicenseVerification
 import ContractorProfile from "./pages/contractor/ContractorProfile";
 import ChatMessages from "./pages/messages/ChatMessages";
 import CustomerProfile from "./pages/customer/CustomerProfile";
+import DisputeList from "./pages/Others/dispute/DisputeList";
+import ServiceList from "./pages/Others/services/ServiceList";
+import CreateService from "./pages/Others/services/CreateService";
 
 function App() {
   return (
@@ -33,6 +36,9 @@ function App() {
           <Route path="/contractor-profile" element={<ContractorProfile />} />
           <Route path="/customer-profile" element={<CustomerProfile />} />
           <Route path="/messages" element={<ChatMessages />} />
+          <Route path="/dispute" element={<DisputeList />} />
+          <Route path="/service_list" element={<ServiceList />} />
+          <Route path="/create_service" element={<CreateService />} />
         </Route>
       </Routes>
     </div>
