@@ -58,7 +58,7 @@ const Sidebar = () => {
 
       <Nav className="flex-column gap-2">
         <Nav.Link
-          onClick={() => handleLinkClick("#")}
+          onClick={() => handleLinkClick("/dashboard")}
           className={`d-flex align-items-center gap-3 px-4 py-3 sidebar-link ${pathname === "/dashboard"
             ? "bg-warning text-white fw-semibold"
             : "text-dark"
@@ -173,9 +173,9 @@ const Sidebar = () => {
             </Nav.Link>
             <Nav.Link
               onClick={() =>
-                handleLinkClick("Platform Fee", "/revenue/platform-fee")
+                handleLinkClick("/platform_fee")
               }
-              className={`text-dark small py-1 ${pathname === "Platform Fee" ? "text-warning fw-semibold" : ""
+              className={`text-dark small py-1 ${pathname === "/platform_fee" ? "text-warning fw-semibold" : ""
                 }`}
             >
               Platform Fee
@@ -206,8 +206,8 @@ const Sidebar = () => {
               Services
             </Nav.Link>
             <Nav.Link
-              onClick={() => handleLinkClick("/template")}
-              className={`text-dark small py-1 ${pathname === "/template"
+              onClick={() => handleLinkClick("/template_list")}
+              className={`text-dark small py-1 ${pathname === "/template_list"
                 ? "text-warning fw-semibold"
                 : ""
                 }`}

@@ -354,7 +354,7 @@ strong {
 
 .small,
 small {
-    font-size: .875em
+    font-size: .775em
 }
 
 .mark,
@@ -14214,3 +14214,10 @@ input.chat-input {
   border-radius: 8px;
   cursor: pointer;
 }
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+

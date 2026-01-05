@@ -19,6 +19,10 @@ import CreateService from "./pages/Others/services/CreateService";
 import LicenseVerificationDetail from "./pages/licenseVerification/LicenseVerificationDetail";
 import Offer from "./pages/offers/Offer";
 import PlatformSuspension from "./pages/platformSuspension/PlatformSuspension";
+import Dashboard from "./pages/dashboard/Dashboard";
+import TemplateList from "./pages/templates/TemplateList";
+import CreateTemplate from "./pages/templates/CreateTemplate";
+import PlatformFee from "./pages/revenue/PlatformFee";
 
 function App() {
   return (
@@ -29,6 +33,7 @@ function App() {
         </Route>
         {/* protected routes */}
         <Route element={<Auth />}>
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/customers" element={<CustomerList />} />
           <Route path="/contractors" element={<ContractorList />} />
@@ -43,6 +48,9 @@ function App() {
           <Route path="/dispute" element={<DisputeList />} />
           <Route path="/service_list" element={<ServiceList />} />
           <Route path="/create_service" element={<CreateService />} />
+          <Route path="/template_list" element={<TemplateList />} />
+          <Route path="/create_template" element={<CreateTemplate />} />
+          <Route path="/platform_fee" element={<PlatformFee/>} />
           <Route path="/offer" element={<Offer />} />
           <Route path="/platform_suspension" element={<PlatformSuspension/>} />
         </Route>
